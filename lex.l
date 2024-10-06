@@ -4,11 +4,14 @@
 
 num     [0-9]+
 word    [a-zA-Z][a-zA-Z0-9]*
+string  \".*\"
+special 
 
 %%
-{num}   printf("NUMBER");
-{word}  printf("WORD");
-.?      printf("OTHER");
+{num}       printf("NUMBER");
+{string}    printf("STRING");
+{word}      printf("WORD");
+.?          printf("OTHER");
 %%
 
 int yywrap() {
