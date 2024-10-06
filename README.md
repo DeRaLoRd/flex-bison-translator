@@ -10,6 +10,6 @@
 In CMD run:
 
 ```
->make
->test
+> make
+> test
 ```
