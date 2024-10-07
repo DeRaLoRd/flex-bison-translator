@@ -3,8 +3,8 @@
 %}
 
 num     [0-9]+
-word    [a-zA-Z][a-zA-Z0-9]*
-string  \".*\"
+word    [a-zA-Z_][a-zA-Z0-9]*
+string  \'.*\'
 special 
 
 %%
