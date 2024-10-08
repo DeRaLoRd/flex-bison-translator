@@ -17,7 +17,7 @@ Install all programms.
 By default `gcc` will be installed in `MinGW` directory. In the `MinGW` directory, locate `bin` directory and add it to the `PATH`.  
 By default `make`, `flex` and `bison` will be installed in the `GnuWin32` directory. In the `GnuWin32` directory, locate `bin` directory and add it to the `PATH`
 
-While in the working directoty, type in CMD
+While in the working directory, type in CMD
 
 ```
 > make
