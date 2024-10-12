@@ -20,5 +20,5 @@ By default `make`, `flex` and `bison` will be installed in the `GnuWin32` direct
 While in the working directory, type in CMD
 
 ```
-make && test
+make && translate
 ```

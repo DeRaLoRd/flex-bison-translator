@@ -1,5 +1,6 @@
 %{
 #include <stdio.h>
+#include <string.h>
 %}
 
 num         [0-9]+
