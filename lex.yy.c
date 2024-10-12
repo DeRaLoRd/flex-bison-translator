@@ -506,9 +506,9 @@ static char *yy_last_accepting_cpos;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "lex.l"
+#line 1 "translate.l"
 #define INITIAL 0
-#line 2 "lex.l"
+#line 2 "translate.l"
 #include <stdio.h>
 #line 514 "lex.yy.c"
 
@@ -661,7 +661,7 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
 
-#line 89 "lex.l"
+#line 89 "translate.l"
 
 #line 667 "lex.yy.c"
 
@@ -748,367 +748,367 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 90 "lex.l"
+#line 90 "translate.l"
 printf("PROGRAM_START ");
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 91 "lex.l"
+#line 91 "translate.l"
 printf("USES_KW ");
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 92 "lex.l"
+#line 92 "translate.l"
 printf("VAR_KW ");
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 93 "lex.l"
+#line 93 "translate.l"
 printf("CONST_KW ");
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 94 "lex.l"
+#line 94 "translate.l"
 printf("BEGIN_KW ");
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 95 "lex.l"
+#line 95 "translate.l"
 printf("END_KW ");
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 96 "lex.l"
+#line 96 "translate.l"
 printf("PROGRAMM_END ");
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 98 "lex.l"
+#line 98 "translate.l"
 printf("COMMENT ");
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 100 "lex.l"
+#line 100 "translate.l"
 printf("WRITE_F ");
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 101 "lex.l"
+#line 101 "translate.l"
 printf("WRITELN_F ");
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 102 "lex.l"
+#line 102 "translate.l"
 printf("READ_F ");
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 103 "lex.l"
+#line 103 "translate.l"
 printf("READLN_F ");
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 105 "lex.l"
+#line 105 "translate.l"
 printf("UCHAR_T ");
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 106 "lex.l"
+#line 106 "translate.l"
 printf("CHAR_T ");
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 107 "lex.l"
+#line 107 "translate.l"
 printf("USHORT_T ");
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 108 "lex.l"
+#line 108 "translate.l"
 printf("SHORT_T ");
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 109 "lex.l"
+#line 109 "translate.l"
 printf("UINT_T ");
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 110 "lex.l"
+#line 110 "translate.l"
 printf("INT_T ");
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 111 "lex.l"
+#line 111 "translate.l"
 printf("ULONG_T ");
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 112 "lex.l"
+#line 112 "translate.l"
 printf("LONG_T ");
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 113 "lex.l"
+#line 113 "translate.l"
 printf("LONG_LONG_T ");
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 115 "lex.l"
+#line 115 "translate.l"
 printf("FLOAT_T ");
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 116 "lex.l"
+#line 116 "translate.l"
 printf("DOUBLE_T ");
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 118 "lex.l"
+#line 118 "translate.l"
 printf("WCHAR_T ");
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 119 "lex.l"
+#line 119 "translate.l"
 printf("STRING_T ");
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 121 "lex.l"
+#line 121 "translate.l"
 printf("OPEN_BR ");
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 122 "lex.l"
+#line 122 "translate.l"
 printf("CLOSE_BR ");
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 123 "lex.l"
+#line 123 "translate.l"
 printf("OPEN_SQUARE ");
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 124 "lex.l"
+#line 124 "translate.l"
 printf("CLOSE_SQUARE ");
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 125 "lex.l"
+#line 125 "translate.l"
 printf("OPEN_CURLY ");
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 126 "lex.l"
+#line 126 "translate.l"
 printf("CLOSE_CURLY ");
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 127 "lex.l"
+#line 127 "translate.l"
 printf("");
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 128 "lex.l"
+#line 128 "translate.l"
 printf("\n");
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 130 "lex.l"
+#line 130 "translate.l"
 printf("ASTERISK ");
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 131 "lex.l"
+#line 131 "translate.l"
 printf("PLUS ");
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 132 "lex.l"
+#line 132 "translate.l"
 printf("MINUS ");
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 133 "lex.l"
+#line 133 "translate.l"
 printf("DIV_F ");
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 134 "lex.l"
+#line 134 "translate.l"
 printf("DIV_KW ");
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 135 "lex.l"
+#line 135 "translate.l"
 printf("MOD_KW ");
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 136 "lex.l"
+#line 136 "translate.l"
 printf("EQUALS ");
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 137 "lex.l"
+#line 137 "translate.l"
 printf("NOT_EQUAL");
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 138 "lex.l"
+#line 138 "translate.l"
 printf("LESS_THAN ");
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 139 "lex.l"
+#line 139 "translate.l"
 printf("GREATER_THAN ");
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 140 "lex.l"
+#line 140 "translate.l"
 printf("LESS_OR_EQUALS ");
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 141 "lex.l"
+#line 141 "translate.l"
 printf("GREATER_OR_EQUALS ");
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 143 "lex.l"
+#line 143 "translate.l"
 printf("AND_KW ");
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 144 "lex.l"
+#line 144 "translate.l"
 printf("OR_KW ");
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 145 "lex.l"
+#line 145 "translate.l"
 printf("NOT_KW ");
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 146 "lex.l"
+#line 146 "translate.l"
 printf("XOR_KW ");
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 148 "lex.l"
+#line 148 "translate.l"
 printf("IF_KW ");
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 149 "lex.l"
+#line 149 "translate.l"
 printf("ELSE_KW ");
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 150 "lex.l"
+#line 150 "translate.l"
 printf("LOOP_KW ");
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 151 "lex.l"
+#line 151 "translate.l"
 printf("WHILE_KW ");
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 152 "lex.l"
+#line 152 "translate.l"
 printf("DO_KW ");
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
-#line 153 "lex.l"
+#line 153 "translate.l"
 printf("FOR_KW ");
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
-#line 154 "lex.l"
+#line 154 "translate.l"
 printf("TO_KW ");
 	YY_BREAK
 case 57:
 YY_RULE_SETUP
-#line 155 "lex.l"
+#line 155 "translate.l"
 printf("DOWNTO_KW ");
 	YY_BREAK
 case 58:
 YY_RULE_SETUP
-#line 156 "lex.l"
+#line 156 "translate.l"
 printf("REPEAT_KW ");
 	YY_BREAK
 case 59:
 YY_RULE_SETUP
-#line 157 "lex.l"
+#line 157 "translate.l"
 printf("UNTIL_KW ");
 	YY_BREAK
 case 60:
 YY_RULE_SETUP
-#line 158 "lex.l"
+#line 158 "translate.l"
 printf("BREAK_KW ");
 	YY_BREAK
 case 61:
 YY_RULE_SETUP
-#line 159 "lex.l"
+#line 159 "translate.l"
 printf("CONTINUE_KW ");
 	YY_BREAK
 case 62:
 YY_RULE_SETUP
-#line 161 "lex.l"
+#line 161 "translate.l"
 printf("PROCEDURE_KW ");
 	YY_BREAK
 case 63:
 YY_RULE_SETUP
-#line 162 "lex.l"
+#line 162 "translate.l"
 printf("FUNCTION_KW ");
 	YY_BREAK
 case 64:
 YY_RULE_SETUP
-#line 164 "lex.l"
+#line 164 "translate.l"
 printf("SEMICOLON ");
 	YY_BREAK
 case 65:
 YY_RULE_SETUP
-#line 165 "lex.l"
+#line 165 "translate.l"
 printf("COLON ");
 	YY_BREAK
 case 66:
 YY_RULE_SETUP
-#line 166 "lex.l"
+#line 166 "translate.l"
 printf("DOT ");
 	YY_BREAK
 case 67:
 YY_RULE_SETUP
-#line 167 "lex.l"
+#line 167 "translate.l"
 printf("RANGE ");
 	YY_BREAK
 case 68:
 YY_RULE_SETUP
-#line 169 "lex.l"
+#line 169 "translate.l"
 printf("NUMBER ");
 	YY_BREAK
 case 69:
 YY_RULE_SETUP
-#line 170 "lex.l"
+#line 170 "translate.l"
 printf("STRING ");
 	YY_BREAK
 case 70:
 YY_RULE_SETUP
-#line 171 "lex.l"
+#line 171 "translate.l"
 printf("CHAR ");
 	YY_BREAK
 case 71:
 YY_RULE_SETUP
-#line 172 "lex.l"
+#line 172 "translate.l"
 printf("WORD ");
 	YY_BREAK
 case 72:
 YY_RULE_SETUP
-#line 173 "lex.l"
+#line 173 "translate.l"
 printf("OTHER ");
 	YY_BREAK
 case 73:
 YY_RULE_SETUP
-#line 174 "lex.l"
+#line 174 "translate.l"
 ECHO;
 	YY_BREAK
 #line 1115 "lex.yy.c"
@@ -1997,7 +1997,7 @@ int main()
 	return 0;
 	}
 #endif
-#line 174 "lex.l"
+#line 174 "translate.l"
 
 
 int yywrap() {

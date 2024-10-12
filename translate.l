@@ -15,7 +15,7 @@ begin       begin
 end         end
 pr_end      end\.
 
-comment     \(\(*.*\)\)|\{.*\}|\/\/.*
+comment     \(\*.*\*\)|\{.*\}|\/\/.*
 
 write       write
 writeln     writeln

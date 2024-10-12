@@ -1,5 +1,7 @@
+NAME = translate
+
 main: fl
-	gcc lex.yy.c -o test -L. -lfl
+	gcc lex.yy.c -o $(NAME) -L. -lfl
 
 fl:
-	flex lex.l
+	flex $(NAME).l
