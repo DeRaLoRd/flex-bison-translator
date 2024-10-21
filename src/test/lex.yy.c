@@ -655,7 +655,7 @@ return (END_KW);
 case 5:
 YY_RULE_SETUP
 #line 46 "test.l"
-{yylval.ival = atoi(yytext); return (INT_T);}
+{yylval.cval = "int"; return (INT_T);}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
@@ -715,7 +715,7 @@ YY_RULE_SETUP
 case 17:
 YY_RULE_SETUP
 #line 62 "test.l"
-{yylval.cval = yytext; return (WORD);}
+{yylval.cval = strdup(yytext); return (WORD);}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP

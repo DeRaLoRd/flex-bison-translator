@@ -1,2 +1,11 @@
-WORD 
-PROGRAM_START WORD SEMICOLON 
+we hav programm Source
+
+
+we hav var x of type int
+
+
+we hav vars such as:
+
+we assign value 2 to var x
+
+program began and we do:

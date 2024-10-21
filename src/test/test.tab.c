@@ -73,8 +73,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/*FILE* input_file = fopen("source.txt", "r");
-FILE* output_file = fopen("output.txt", "w");*/
+extern FILE* yyin;
+extern FILE* yyout;
 
 int yylex();
 void yyerror(char* s);
@@ -1350,35 +1350,35 @@ yyreduce:
 
 /* Line 1455 of yacc.c  */
 #line 29 "test.y"
-    {printf("we hav programm %s\n", (yyvsp[(2) - (3)].cval));;}
+    {fprintf(yyout, "we hav programm %s\n", (yyvsp[(2) - (3)].cval));;}
     break;
 
   case 5:
 
 /* Line 1455 of yacc.c  */
 #line 34 "test.y"
-    {printf("we hav vars such as:\n");;}
+    {fprintf(yyout, "we hav vars such as:\n");;}
     break;
 
   case 8:
 
 /* Line 1455 of yacc.c  */
 #line 43 "test.y"
-    {printf("we hav var %s of type %s\n", (yyvsp[(1) - (4)].cval), (yyvsp[(3) - (4)].cval));;}
+    {fprintf(yyout, "we hav var %s of type %s\n", (yyvsp[(1) - (4)].cval), (yyvsp[(3) - (4)].cval));;}
     break;
 
   case 10:
 
 /* Line 1455 of yacc.c  */
 #line 51 "test.y"
-    {printf("program began and we do:\n");;}
+    {fprintf(yyout, "program began and we do:\n");;}
     break;
 
   case 14:
 
 /* Line 1455 of yacc.c  */
 #line 64 "test.y"
-    {printf("we assign value %d to var %s\n", (yyvsp[(3) - (3)].ival), (yyvsp[(1) - (3)].cval));;}
+    {fprintf(yyout, "we assign value %d to var %s\n", (yyvsp[(3) - (3)].ival), (yyvsp[(1) - (3)].cval));;}
     break;
 
 
@@ -1601,10 +1601,12 @@ yyreturn:
 
 int main()
 {
+    yyin = fopen("source.txt", "r");
+    yyout = fopen("output.txt", "w");
     return yyparse();
 }
 
 void yyerror(char* s)
 {
-    printf("%s", s);
+    fprintf(yyout, "%s", s);
 }

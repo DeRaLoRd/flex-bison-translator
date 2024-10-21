@@ -43,7 +43,7 @@ colon       :
 {begin}     return (BEGIN_KW);
 {end}       return (END_KW);
 
-{int_type}  {yylval.ival = atoi(yytext); return (INT_T);}
+{int_type}  {yylval.cval = "int"; return (INT_T);}
 
 {o_br}      fprintf(yyout, "OPEN_BR ");
 {cl_br}     fprintf(yyout, "CLOSE_BR ");
@@ -59,7 +59,7 @@ colon       :
 {colon}     return (COLON);
 
 {num}       {yylval.ival = atoi(yytext); return (NUMBER);}
-{word}      {yylval.cval = yytext; return (WORD);}
+{word}      {yylval.cval = strdup(yytext); return (WORD);}
 .?          fprintf(yyout, "OTHER ");
 %%
 
