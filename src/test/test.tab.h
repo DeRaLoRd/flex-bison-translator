@@ -41,14 +41,15 @@
    enum yytokentype {
      PROGRAM_START = 258,
      VAR_KW = 259,
-     BEGIN_KW = 260,
-     SEMICOLON = 261,
-     COLON = 262,
-     EQUALS = 263,
-     INT_T = 264,
-     PROGRAMM_END = 265,
-     NUMBER = 266,
-     WORD = 267
+     WORD = 260,
+     COLON = 261,
+     SEMICOLON = 262,
+     INT_T = 263,
+     NUMBER = 264,
+     BEGIN_KW = 265,
+     ASSIGN = 266,
+     END_KW = 267,
+     DOT = 268
    };
 #endif
 
@@ -59,15 +60,15 @@ typedef union YYSTYPE
 {
 
 /* Line 1676 of yacc.c  */
-#line 15 "test.y"
+#line 12 "test.y"
 
-    char* id;
-    int number;
+    int ival;
+    char* cval;
 
 
 
 /* Line 1676 of yacc.c  */
-#line 71 "test.tab.h"
+#line 72 "test.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */

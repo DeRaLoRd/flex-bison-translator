@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "test.tab.h"
 %}
 
 num         [0-9]+
@@ -12,6 +13,7 @@ char        \'.?\'
 pr_start    (Program)
 var         (var)
 begin       begin
+end         end
 pr_end      end\.
 
 int_type    integer|longint
@@ -30,16 +32,18 @@ newline     \n
 plus        \+
 minus       \-
 assign      :=
+dot         \.
 
 semicolon   ;
+colon       :
 
 %%
-{pr_start}  fprintf(yyout, "PROGRAM_START ");
-{var}       fprintf(yyout, "VAR_KW ");
-{begin}     fprintf(yyout, "BEGIN_KW ");
-{pr_end}    fprintf(yyout, "PROGRAMM_END ");
+{pr_start}  return (PROGRAM_START);
+{var}       return (VAR_KW);
+{begin}     return (BEGIN_KW);
+{end}       return (END_KW);
 
-{int_type}  fprintf(yyout, "INT_T ");
+{int_type}  {yylval.ival = atoi(yytext); return (INT_T);}
 
 {o_br}      fprintf(yyout, "OPEN_BR ");
 {cl_br}     fprintf(yyout, "CLOSE_BR ");
@@ -48,27 +52,17 @@ semicolon   ;
 
 {plus}      fprintf(yyout, "PLUS ");
 {minus}     fprintf(yyout, "MINUS ");
-{assign}    fprintf(yyout, "ASSIGN ");
+{assign}    return (ASSIGN);
+{dot}       return (DOT);
 
-{semicolon} fprintf(yyout, "SEMICOLON ");
+{semicolon} return (SEMICOLON);
+{colon}     return (COLON);
 
-{num}       fprintf(yyout, "NUMBER ");
-{string}    fprintf(yyout, "STRING ");
-{char}      fprintf(yyout, "CHAR ");
-{word}      fprintf(yyout, "WORD ");
+{num}       {yylval.ival = atoi(yytext); return (NUMBER);}
+{word}      {yylval.cval = yytext; return (WORD);}
 .?          fprintf(yyout, "OTHER ");
 %%
 
 int yywrap() {
     return 1;
-}
-
-int main()
-{
-    FILE* input_file = fopen("source.pas", "r");
-    FILE* output_file = fopen("output.txt", "w");
-    yyin = input_file;
-    yyout = output_file;
-    yylex();
-    return 0;
 }

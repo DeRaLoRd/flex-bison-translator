@@ -4,5 +4,7 @@ var
   y:integer = 3;
 
 begin
+  y := 3 * 2 (7 - 2);
   x = 1 + 2 - y;
+  if x > y then writeln('x is greater') else writeln('y is greater');
 end.
