@@ -8,13 +8,12 @@ word        [a-zA-Z_][a-zA-Z0-9_]*
 string      \'..+\'
 char        \'.?\'
 
-pr_start    (Program[ ])
-var         (var[ ])
+pr_start    Program
+var         var
 const       const
 uses        uses
 begin       begin
 end         end
-pr_end      end\.
 
 comment     \(\*.*\*\)|\{.*\}|\/\/.*
 
@@ -94,7 +93,6 @@ range       \.\.
 {const}     printf("CONST_KW ");
 {begin}     printf("BEGIN_KW ");
 {end}       printf("END_KW ");
-{pr_end}    printf("PROGRAMM_END ");
 
 {comment}   printf("COMMENT ");
 
@@ -176,4 +174,14 @@ range       \.\.
 
 int yywrap() {
     return 1;
+}
+
+int main()
+{
+    FILE* input_file = fopen("source.txt", "r");
+    FILE* output_file = fopen("output.txt", "w");
+    yyin = input_file;
+    yyout = output_file;
+    yylex();
+    return 0;
 }

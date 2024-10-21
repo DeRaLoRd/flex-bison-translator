@@ -398,8 +398,9 @@ char *yytext;
 #define INITIAL 0
 #line 2 "test.l"
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
-#line 403 "lex.yy.c"
+#line 404 "lex.yy.c"
 
 /* Macros after this point can all be overridden by user definitions in
  * section 1.
@@ -550,9 +551,9 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
 
-#line 35 "test.l"
+#line 36 "test.l"
 
-#line 556 "lex.yy.c"
+#line 557 "lex.yy.c"
 
 	if ( yy_init )
 		{
@@ -637,100 +638,100 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 36 "test.l"
-printf("PROGRAM_START ");
+#line 37 "test.l"
+fprintf(yyout, "PROGRAM_START ");
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 37 "test.l"
-printf("VAR_KW ");
+#line 38 "test.l"
+fprintf(yyout, "VAR_KW ");
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 38 "test.l"
-printf("BEGIN_KW ");
+#line 39 "test.l"
+fprintf(yyout, "BEGIN_KW ");
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 39 "test.l"
-printf("PROGRAMM_END ");
+#line 40 "test.l"
+fprintf(yyout, "PROGRAMM_END ");
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 41 "test.l"
-printf("INT_T ");
+#line 42 "test.l"
+fprintf(yyout, "INT_T ");
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 43 "test.l"
-printf("OPEN_BR ");
+#line 44 "test.l"
+fprintf(yyout, "OPEN_BR ");
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 44 "test.l"
-printf("CLOSE_BR ");
+#line 45 "test.l"
+fprintf(yyout, "CLOSE_BR ");
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 45 "test.l"
-printf("");
+#line 46 "test.l"
+fprintf(yyout, "");
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 46 "test.l"
-printf("\n");
+#line 47 "test.l"
+fprintf(yyout, "\n");
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 48 "test.l"
-printf("PLUS ");
+#line 49 "test.l"
+fprintf(yyout, "PLUS ");
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 49 "test.l"
-printf("MINUS ");
+#line 50 "test.l"
+fprintf(yyout, "MINUS ");
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 50 "test.l"
-printf("ASSIGN ");
+#line 51 "test.l"
+fprintf(yyout, "ASSIGN ");
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 52 "test.l"
-printf("SEMICOLON ");
+#line 53 "test.l"
+fprintf(yyout, "SEMICOLON ");
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 54 "test.l"
-printf("NUMBER ");
+#line 55 "test.l"
+fprintf(yyout, "NUMBER ");
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 55 "test.l"
-printf("STRING ");
+#line 56 "test.l"
+fprintf(yyout, "STRING ");
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 56 "test.l"
-printf("CHAR ");
+#line 57 "test.l"
+fprintf(yyout, "CHAR ");
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 57 "test.l"
-printf("WORD ");
+#line 58 "test.l"
+fprintf(yyout, "WORD ");
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 58 "test.l"
-printf("OTHER ");
+#line 59 "test.l"
+fprintf(yyout, "OTHER ");
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 59 "test.l"
+#line 60 "test.l"
 ECHO;
 	YY_BREAK
-#line 734 "lex.yy.c"
+#line 735 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1616,9 +1617,19 @@ int main()
 	return 0;
 	}
 #endif
-#line 59 "test.l"
+#line 60 "test.l"
 
 
 int yywrap() {
     return 1;
+}
+
+int main()
+{
+    FILE* input_file = fopen("source.pas", "r");
+    FILE* output_file = fopen("output.txt", "w");
+    yyin = input_file;
+    yyout = output_file;
+    yylex();
+    return 0;
 }
