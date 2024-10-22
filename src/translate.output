@@ -1,0 +1,539 @@
+Terminals unused in grammar
+
+   USES_KW
+   CONST_KW
+   COMMENT
+   WRITE_F
+   WRITELN_F
+   READ_F
+   READLN_F
+   OPEN_BR
+   CLOSE_BR
+   OPEN_SQUARE
+   CLOSE_SQUARE
+   OPEN_CURLY
+   CLOSE_CURLY
+   QUOTE
+   ASTERISK
+   PLUS
+   MINUS
+   DIV_F
+   DIV_KW
+   MOD_KW
+   EQUALS
+   NOT_EQUAL
+   LESS_THAN
+   GREATER_THAN
+   LESS_OR_EQUALS
+   GREATER_OR_EQUALS
+   AND_KW
+   OR_KW
+   NOT_KW
+   XOR_KW
+   IF_KW
+   THEN_KW
+   ELSE_KW
+   LOOP_KW
+   WHILE_KW
+   DO_KW
+   FOR_KW
+   TO_KW
+   DOWNTO_KW
+   REPEAT_KW
+   UNTIL_KW
+   BREAK_KW
+   CONTINUE_KW
+   PROCEDURE_KW
+   FUNCTION_KW
+   RANGE
+   NUMBERF
+   OTHER
+
+
+Грамматика
+
+    0 $accept: program $end
+
+    1 program: start_block var_block prog_block
+
+    2 start_block: PROGRAM_START WORD SEMICOLON
+
+    3 var_block: /* пусто */
+    4          | var_block_begin var_decls
+
+    5 var_block_begin: VAR_KW
+
+    6 var_decls: /* пусто */
+    7          | var_decls var_decl
+
+    8 var_decl: WORD COLON var_type SEMICOLON
+
+    9 var_type: CHAR_T
+   10         | UCHAR_T
+   11         | WCHAR_T
+   12         | SHORT_T
+   13         | USHORT_T
+   14         | INT_T
+   15         | UINT_T
+   16         | LONG_T
+   17         | ULONG_T
+   18         | LONG_LONG_T
+   19         | FLOAT_T
+   20         | DOUBLE_T
+   21         | STRING_T
+
+   22 prog_block: prog_block_begin commands prog_block_end
+
+   23 prog_block_begin: BEGIN_KW
+
+   24 commands: /* пусто */
+   25         | commands command
+
+   26 command: assignment SEMICOLON
+
+   27 assignment: WORD ASSIGN NUMBER
+
+   28 prog_block_end: END_KW DOT
+
+
+Терминальные символы с правилами, в которых они появляются
+
+$end (0) 0
+error (256)
+PROGRAM_START (258) 2
+USES_KW (259)
+VAR_KW (260) 5
+CONST_KW (261)
+BEGIN_KW (262) 23
+END_KW (263) 28
+COMMENT (264)
+WRITE_F (265)
+WRITELN_F (266)
+READ_F (267)
+READLN_F (268)
+USHORT_T (269) 13
+SHORT_T (270) 12
+UINT_T (271) 15
+INT_T (272) 14
+ULONG_T (273) 17
+LONG_T (274) 16
+LONG_LONG_T (275) 18
+FLOAT_T (276) 19
+DOUBLE_T (277) 20
+UCHAR_T (278) 10
+CHAR_T (279) 9
+WCHAR_T (280) 11
+STRING_T (281) 21
+OPEN_BR (282)
+CLOSE_BR (283)
+OPEN_SQUARE (284)
+CLOSE_SQUARE (285)
+OPEN_CURLY (286)
+CLOSE_CURLY (287)
+QUOTE (288)
+ASTERISK (289)
+PLUS (290)
+MINUS (291)
+DIV_F (292)
+DIV_KW (293)
+MOD_KW (294)
+ASSIGN (295) 27
+EQUALS (296)
+NOT_EQUAL (297)
+LESS_THAN (298)
+GREATER_THAN (299)
+LESS_OR_EQUALS (300)
+GREATER_OR_EQUALS (301)
+AND_KW (302)
+OR_KW (303)
+NOT_KW (304)
+XOR_KW (305)
+IF_KW (306)
+THEN_KW (307)
+ELSE_KW (308)
+LOOP_KW (309)
+WHILE_KW (310)
+DO_KW (311)
+FOR_KW (312)
+TO_KW (313)
+DOWNTO_KW (314)
+REPEAT_KW (315)
+UNTIL_KW (316)
+BREAK_KW (317)
+CONTINUE_KW (318)
+PROCEDURE_KW (319)
+FUNCTION_KW (320)
+SEMICOLON (321) 2 8 26
+COLON (322) 8
+DOT (323) 28
+RANGE (324)
+NUMBER (325) 27
+NUMBERF (326)
+WORD (327) 2 8 27
+OTHER (328)
+
+
+Нетерминальные символы с правилами, в которых они появляются
+
+$accept (74)
+    налево: 0
+program (75)
+    налево: 1, направо: 0
+start_block (76)
+    налево: 2, направо: 1
+var_block (77)
+    налево: 3 4, направо: 1
+var_block_begin (78)
+    налево: 5, направо: 4
+var_decls (79)
+    налево: 6 7, направо: 4 7
+var_decl (80)
+    налево: 8, направо: 7
+var_type (81)
+    налево: 9 10 11 12 13 14 15 16 17 18 19 20 21, направо: 8
+prog_block (82)
+    налево: 22, направо: 1
+prog_block_begin (83)
+    налево: 23, направо: 22
+commands (84)
+    налево: 24 25, направо: 22 25
+command (85)
+    налево: 26, направо: 25
+assignment (86)
+    налево: 27, направо: 26
+prog_block_end (87)
+    налево: 28, направо: 22
+
+
+состояние 0
+
+    0 $accept: . program $end
+
+    PROGRAM_START  сдвиг, и переход в состояние 1
+
+    program      переход в состояние 2
+    start_block  переход в состояние 3
+
+
+состояние 1
+
+    2 start_block: PROGRAM_START . WORD SEMICOLON
+
+    WORD  сдвиг, и переход в состояние 4
+
+
+состояние 2
+
+    0 $accept: program . $end
+
+    $end  сдвиг, и переход в состояние 5
+
+
+состояние 3
+
+    1 program: start_block . var_block prog_block
+
+    VAR_KW  сдвиг, и переход в состояние 6
+
+    $default  вывод с использованием правила 3 (var_block)
+
+    var_block        переход в состояние 7
+    var_block_begin  переход в состояние 8
+
+
+состояние 4
+
+    2 start_block: PROGRAM_START WORD . SEMICOLON
+
+    SEMICOLON  сдвиг, и переход в состояние 9
+
+
+состояние 5
+
+    0 $accept: program $end .
+
+    $default  accept
+
+
+состояние 6
+
+    5 var_block_begin: VAR_KW .
+
+    $default  вывод с использованием правила 5 (var_block_begin)
+
+
+состояние 7
+
+    1 program: start_block var_block . prog_block
+
+    BEGIN_KW  сдвиг, и переход в состояние 10
+
+    prog_block        переход в состояние 11
+    prog_block_begin  переход в состояние 12
+
+
+состояние 8
+
+    4 var_block: var_block_begin . var_decls
+
+    $default  вывод с использованием правила 6 (var_decls)
+
+    var_decls  переход в состояние 13
+
+
+состояние 9
+
+    2 start_block: PROGRAM_START WORD SEMICOLON .
+
+    $default  вывод с использованием правила 2 (start_block)
+
+
+состояние 10
+
+   23 prog_block_begin: BEGIN_KW .
+
+    $default  вывод с использованием правила 23 (prog_block_begin)
+
+
+состояние 11
+
+    1 program: start_block var_block prog_block .
+
+    $default  вывод с использованием правила 1 (program)
+
+
+состояние 12
+
+   22 prog_block: prog_block_begin . commands prog_block_end
+
+    $default  вывод с использованием правила 24 (commands)
+
+    commands  переход в состояние 14
+
+
+состояние 13
+
+    4 var_block: var_block_begin var_decls .
+    7 var_decls: var_decls . var_decl
+
+    WORD  сдвиг, и переход в состояние 15
+
+    $default  вывод с использованием правила 4 (var_block)
+
+    var_decl  переход в состояние 16
+
+
+состояние 14
+
+   22 prog_block: prog_block_begin commands . prog_block_end
+   25 commands: commands . command
+
+    END_KW  сдвиг, и переход в состояние 17
+    WORD    сдвиг, и переход в состояние 18
+
+    command         переход в состояние 19
+    assignment      переход в состояние 20
+    prog_block_end  переход в состояние 21
+
+
+состояние 15
+
+    8 var_decl: WORD . COLON var_type SEMICOLON
+
+    COLON  сдвиг, и переход в состояние 22
+
+
+состояние 16
+
+    7 var_decls: var_decls var_decl .
+
+    $default  вывод с использованием правила 7 (var_decls)
+
+
+состояние 17
+
+   28 prog_block_end: END_KW . DOT
+
+    DOT  сдвиг, и переход в состояние 23
+
+
+состояние 18
+
+   27 assignment: WORD . ASSIGN NUMBER
+
+    ASSIGN  сдвиг, и переход в состояние 24
+
+
+состояние 19
+
+   25 commands: commands command .
+
+    $default  вывод с использованием правила 25 (commands)
+
+
+состояние 20
+
+   26 command: assignment . SEMICOLON
+
+    SEMICOLON  сдвиг, и переход в состояние 25
+
+
+состояние 21
+
+   22 prog_block: prog_block_begin commands prog_block_end .
+
+    $default  вывод с использованием правила 22 (prog_block)
+
+
+состояние 22
+
+    8 var_decl: WORD COLON . var_type SEMICOLON
+
+    USHORT_T     сдвиг, и переход в состояние 26
+    SHORT_T      сдвиг, и переход в состояние 27
+    UINT_T       сдвиг, и переход в состояние 28
+    INT_T        сдвиг, и переход в состояние 29
+    ULONG_T      сдвиг, и переход в состояние 30
+    LONG_T       сдвиг, и переход в состояние 31
+    LONG_LONG_T  сдвиг, и переход в состояние 32
+    FLOAT_T      сдвиг, и переход в состояние 33
+    DOUBLE_T     сдвиг, и переход в состояние 34
+    UCHAR_T      сдвиг, и переход в состояние 35
+    CHAR_T       сдвиг, и переход в состояние 36
+    WCHAR_T      сдвиг, и переход в состояние 37
+    STRING_T     сдвиг, и переход в состояние 38
+
+    var_type  переход в состояние 39
+
+
+состояние 23
+
+   28 prog_block_end: END_KW DOT .
+
+    $default  вывод с использованием правила 28 (prog_block_end)
+
+
+состояние 24
+
+   27 assignment: WORD ASSIGN . NUMBER
+
+    NUMBER  сдвиг, и переход в состояние 40
+
+
+состояние 25
+
+   26 command: assignment SEMICOLON .
+
+    $default  вывод с использованием правила 26 (command)
+
+
+состояние 26
+
+   13 var_type: USHORT_T .
+
+    $default  вывод с использованием правила 13 (var_type)
+
+
+состояние 27
+
+   12 var_type: SHORT_T .
+
+    $default  вывод с использованием правила 12 (var_type)
+
+
+состояние 28
+
+   15 var_type: UINT_T .
+
+    $default  вывод с использованием правила 15 (var_type)
+
+
+состояние 29
+
+   14 var_type: INT_T .
+
+    $default  вывод с использованием правила 14 (var_type)
+
+
+состояние 30
+
+   17 var_type: ULONG_T .
+
+    $default  вывод с использованием правила 17 (var_type)
+
+
+состояние 31
+
+   16 var_type: LONG_T .
+
+    $default  вывод с использованием правила 16 (var_type)
+
+
+состояние 32
+
+   18 var_type: LONG_LONG_T .
+
+    $default  вывод с использованием правила 18 (var_type)
+
+
+состояние 33
+
+   19 var_type: FLOAT_T .
+
+    $default  вывод с использованием правила 19 (var_type)
+
+
+состояние 34
+
+   20 var_type: DOUBLE_T .
+
+    $default  вывод с использованием правила 20 (var_type)
+
+
+состояние 35
+
+   10 var_type: UCHAR_T .
+
+    $default  вывод с использованием правила 10 (var_type)
+
+
+состояние 36
+
+    9 var_type: CHAR_T .
+
+    $default  вывод с использованием правила 9 (var_type)
+
+
+состояние 37
+
+   11 var_type: WCHAR_T .
+
+    $default  вывод с использованием правила 11 (var_type)
+
+
+состояние 38
+
+   21 var_type: STRING_T .
+
+    $default  вывод с использованием правила 21 (var_type)
+
+
+состояние 39
+
+    8 var_decl: WORD COLON var_type . SEMICOLON
+
+    SEMICOLON  сдвиг, и переход в состояние 41
+
+
+состояние 40
+
+   27 assignment: WORD ASSIGN NUMBER .
+
+    $default  вывод с использованием правила 27 (assignment)
+
+
+состояние 41
+
+    8 var_decl: WORD COLON var_type SEMICOLON .
+
+    $default  вывод с использованием правила 8 (var_decl)

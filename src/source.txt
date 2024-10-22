@@ -1,10 +1,8 @@
 Program Source;
 var
-  x:integer = 2;
-  y:integer = 3;
+    x: integer;
 
 begin
-  y := 3 * 2 (7 - 2);
-  x = 1 + 2 - y;
-  if x > y then writeln('x is greater') else writeln('y is greater');
+    x := 2;
+    y := 3;
 end.

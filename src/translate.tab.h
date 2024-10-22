@@ -40,16 +40,76 @@
       know about them.  */
    enum yytokentype {
      PROGRAM_START = 258,
-     VAR_KW = 259,
-     WORD = 260,
-     COLON = 261,
-     SEMICOLON = 262,
-     INT_T = 263,
-     NUMBER = 264,
-     BEGIN_KW = 265,
-     ASSIGN = 266,
-     END_KW = 267,
-     DOT = 268
+     USES_KW = 259,
+     VAR_KW = 260,
+     CONST_KW = 261,
+     BEGIN_KW = 262,
+     END_KW = 263,
+     COMMENT = 264,
+     WRITE_F = 265,
+     WRITELN_F = 266,
+     READ_F = 267,
+     READLN_F = 268,
+     USHORT_T = 269,
+     SHORT_T = 270,
+     UINT_T = 271,
+     INT_T = 272,
+     ULONG_T = 273,
+     LONG_T = 274,
+     LONG_LONG_T = 275,
+     FLOAT_T = 276,
+     DOUBLE_T = 277,
+     UCHAR_T = 278,
+     CHAR_T = 279,
+     WCHAR_T = 280,
+     STRING_T = 281,
+     OPEN_BR = 282,
+     CLOSE_BR = 283,
+     OPEN_SQUARE = 284,
+     CLOSE_SQUARE = 285,
+     OPEN_CURLY = 286,
+     CLOSE_CURLY = 287,
+     QUOTE = 288,
+     ASTERISK = 289,
+     PLUS = 290,
+     MINUS = 291,
+     DIV_F = 292,
+     DIV_KW = 293,
+     MOD_KW = 294,
+     ASSIGN = 295,
+     EQUALS = 296,
+     NOT_EQUAL = 297,
+     LESS_THAN = 298,
+     GREATER_THAN = 299,
+     LESS_OR_EQUALS = 300,
+     GREATER_OR_EQUALS = 301,
+     AND_KW = 302,
+     OR_KW = 303,
+     NOT_KW = 304,
+     XOR_KW = 305,
+     IF_KW = 306,
+     THEN_KW = 307,
+     ELSE_KW = 308,
+     LOOP_KW = 309,
+     WHILE_KW = 310,
+     DO_KW = 311,
+     FOR_KW = 312,
+     TO_KW = 313,
+     DOWNTO_KW = 314,
+     REPEAT_KW = 315,
+     UNTIL_KW = 316,
+     BREAK_KW = 317,
+     CONTINUE_KW = 318,
+     PROCEDURE_KW = 319,
+     FUNCTION_KW = 320,
+     SEMICOLON = 321,
+     COLON = 322,
+     DOT = 323,
+     RANGE = 324,
+     NUMBER = 325,
+     NUMBERF = 326,
+     WORD = 327,
+     OTHER = 328
    };
 #endif
 
@@ -60,15 +120,16 @@ typedef union YYSTYPE
 {
 
 /* Line 1676 of yacc.c  */
-#line 12 "translate.y"
+#line 14 "translate.y"
 
     int ival;
+    double fval;
     char* cval;
 
 
 
 /* Line 1676 of yacc.c  */
-#line 72 "translate.tab.h"
+#line 133 "translate.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */

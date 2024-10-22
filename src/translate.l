@@ -62,6 +62,8 @@ gt          <
 lteq        <=
 gteq        >=
 
+assign      :=
+
 not         not
 and         and
 or          or
@@ -97,6 +99,25 @@ range       \.\.
 {begin}     {return BEGIN_KW;}
 {end}       {return END_KW;}
 
+{and}       {return AND_KW;}
+{or}        {return OR_KW;}
+{not}       {return NOT_KW;}
+{xor}       {return XOR_KW;}
+
+{if}        {return IF_KW;}
+{then}      {return THEN_KW;}
+{else}      {return ELSE_KW;}
+{loop}      {return LOOP_KW;}
+{while}     {return WHILE_KW;}
+{do}        {return DO_KW;}
+{for}       {return FOR_KW;}
+{to}        {return TO_KW;}
+{downto}    {return DOWNTO_KW;}
+{repeat}    {return REPEAT_KW;}
+{until}     {return UNTIL_KW;}
+{break}     {return BREAK_KW;}
+{continue}  {return CONTINUE_KW;}
+
 {comment}   {return COMMENT;}
 
 {write}     {return WRITE_F;}
@@ -128,6 +149,8 @@ range       \.\.
 {cl_c_br}   {return CLOSE_CURLY;}
 {quote}     {return QUOTE;}
 
+{assign}    {return ASSIGN;}
+
 {aster}     {return ASTERISK;}
 {plus}      {return PLUS;}
 {minus}     {return MINUS;}
@@ -140,25 +163,6 @@ range       \.\.
 {gt}        {return GREATER_THAN;}
 {lteq}      {return LESS_OR_EQUALS;}
 {gteq}      {return GREATER_OR_EQUALS;}
-
-{and}       {return AND_KW;}
-{or}        {return OR_KW;}
-{not}       {return NOT_KW;}
-{xor}       {return XOR_KW;}
-
-{if}        {return IF_KW;}
-{then}      {return THEN_KW;}
-{else}      {return ELSE_KW;}
-{loop}      {return LOOP_KW;}
-{while}     {return WHILE_KW;}
-{do}        {return DO_KW;}
-{for}       {return FOR_KW;}
-{to}        {return TO_KW;}
-{downto}    {return DOWNTO_KW;}
-{repeat}    {return REPEAT_KW;}
-{until}     {return UNTIL_KW;}
-{break}     {return BREAK_KW;}
-{continue}  {return CONTINUE_KW;}
 
 {proc}      {return PROCEDURE_KW;}
 {func}      {return FUNCTION_KW;}

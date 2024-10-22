@@ -7,6 +7,8 @@ extern FILE* yyout;
 
 int yylex();
 void yyerror(char* s);
+
+int yydebug = 1;
 %}
 
 %union {
@@ -28,7 +30,8 @@ void yyerror(char* s);
 %token OPEN_BR CLOSE_BR OPEN_SQUARE CLOSE_SQUARE OPEN_CURLY CLOSE_CURLY 
 %token QUOTE 
 
-%token ASTERISK PLUS MINUS DIV_F DIV_KW MOD_KW 
+%token ASTERISK PLUS MINUS DIV_F DIV_KW MOD_KW
+%token ASSIGN
 %token EQUALS NOT_EQUAL LESS_THAN GREATER_THAN LESS_OR_EQUALS GREATER_OR_EQUALS AND_KW OR_KW NOT_KW XOR_KW 
 %token IF_KW THEN_KW ELSE_KW LOOP_KW WHILE_KW DO_KW FOR_KW TO_KW DOWNTO_KW REPEAT_KW UNTIL_KW BREAK_KW
 %token CONTINUE_KW 
@@ -40,7 +43,8 @@ void yyerror(char* s);
 %token NUMBER NUMBERF WORD OTHER
 
 %type<ival> NUMBER
-%type<cval> WORD INT_T var_type
+%type<cval> WORD INT_T USHORT_T SHORT_T UINT_T ULONG_T LONG_T LONG_LONG_T FLOAT_T DOUBLE_T 
+%type<cval> UCHAR_T CHAR_T WCHAR_T STRING_T var_type
 %type<fval> NUMBERF
 
 %start program
