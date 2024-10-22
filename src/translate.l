@@ -99,6 +99,8 @@ range       \.\.
 {begin}     {return BEGIN_KW;}
 {end}       {return END_KW;}
 
+{delim}     ;
+
 {and}       {return AND_KW;}
 {or}        {return OR_KW;}
 {not}       {return NOT_KW;}
