@@ -2,8 +2,8 @@
 ## Progress
 | Stage                                                | Status                 |
 |:-----------------------------------------------------|-----------------------:|
-| Lexical analyzator                                   |            In progress |
-| Symantic analyzator                                  |       Not even touched |
+| Lexical analyzator                                   |                   Done |
+| Symantic analyzator                                  |            In progress |
 | Full head-on ready-ass PascalABC.NET -> C translator | Don't know didn't read |
 
 ## How to build
