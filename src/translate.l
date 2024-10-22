@@ -6,6 +6,7 @@
 %}
 
 num         [0-9]+
+numf        [0-9]+\.[0-9]+
 word        [a-zA-Z_][a-zA-Z0-9_]*
 
 pr_start    Program
@@ -103,21 +104,21 @@ range       \.\.
 {read}      {return READ_F;}
 {readln}    {return READLN_F;}
 
-{uchar_type}    {return UCHAR_T;}
-{char_type}     {return CHAR_T;}
-{ushort_type}   {return USHORT_T;}
-{short_type}    {return SHORT_T;}
-{uint_type}     {return UINT_T;}
-{int_type}      {return INT_T;}
-{ulong_type}    {return ULONG_T;}
-{long_type}     {return LONG_T;}
-{long_long_t}   {return LONG_LONG_T;}
+{uchar_type}    {yylval.cval = "unsigned char"; return UCHAR_T;}
+{char_type}     {yylval.cval = "char"; return CHAR_T;}
+{ushort_type}   {yylval.cval = "unsigned short"; return USHORT_T;}
+{short_type}    {yylval.cval = "short"; return SHORT_T;}
+{uint_type}     {yylval.cval = "unsigned int"; return UINT_T;}
+{int_type}      {yylval.cval = "int"; return INT_T;}
+{ulong_type}    {yylval.cval = "unsigned long"; return ULONG_T;}
+{long_type}     {yylval.cval = "long"; return LONG_T;}
+{long_long_t}   {yylval.cval = "long long"; return LONG_LONG_T;}
 
-{float_type}    {return FLOAT_T;}
-{double_type}   {return DOUBLE_T;}
+{float_type}    {yylval.cval = "float"; return FLOAT_T;}
+{double_type}   {yylval.cval = "double"; return DOUBLE_T;}
 
-{wchar_type}    {return WCHAR_T;}
-{string_type}   {return STRING_T;}
+{wchar_type}    {yylval.cval = "wchar_t"; return WCHAR_T;}
+{string_type}   {yylval.cval = "char*"; return STRING_T;}
 
 {o_br}      {return OPEN_BR;}
 {cl_br}     {return CLOSE_BR;}
@@ -167,8 +168,9 @@ range       \.\.
 {dot}       {return DOT;}
 {range}     {return RANGE;}
 
-{num}       {return NUMBER;}
-{word}      {return WORD;}
+{num}       {yylval.ival = atoi(yytext); return NUMBER;}
+{numf}      {yylval.fval = atof(yytext); return NUMBERF;}
+{word}      {yylval.cval = strdup(yytext); return WORD;}
 .?          {return OTHER;}
 %%
 
