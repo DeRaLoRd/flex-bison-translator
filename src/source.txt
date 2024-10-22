@@ -1,6 +1,7 @@
 Program Source;
 var
     x: integer;
+    y:real;
 
 begin
     x := 2;

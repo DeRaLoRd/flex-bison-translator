@@ -7,8 +7,6 @@ extern FILE* yyout;
 
 int yylex();
 void yyerror(char* s);
-
-int yydebug = 1;
 %}
 
 %union {
@@ -56,7 +54,17 @@ program
 ;
 
 start_block
-    : PROGRAM_START WORD SEMICOLON {fprintf(yyout, "we hav programm %s\n", $2);}
+    : PROGRAM_START WORD SEMICOLON {
+        fprintf(yyout, "/* Translated through PTSD - Pascal To \"Si\" translaDor\n" \
+                       " * By Vasiliy Tarasevich 2024\n" \
+                       " * Original programme name - %s\n" \
+                       " */\n\n", $2);
+
+        fprintf(yyout, "#include <stdio.h>\n" \
+                       "#include <stdlib.h>\n" \
+                       "#include <string.h>\n" \
+                       "#include <stddef.h>\n\n");
+    }
 ;
 
 var_block
@@ -65,7 +73,7 @@ var_block
 ;
 
 var_block_begin
-    : VAR_KW {fprintf(yyout, "we hav vars such as:\n");}
+    : VAR_KW {fprintf(yyout, "// Global declarations\n");}
 ;
 
 var_decls
@@ -74,7 +82,7 @@ var_decls
 ;
 
 var_decl
-    : WORD COLON var_type SEMICOLON {fprintf(yyout, "%s of type %s\n", $1, $3);}
+    : WORD COLON var_type SEMICOLON {fprintf(yyout, "%s %s;\n", $3, $1);}
 ;
 
 var_type
@@ -98,7 +106,7 @@ prog_block
 ;
 
 prog_block_begin
-    : BEGIN_KW {fprintf(yyout, "program began and we do:\n");}
+    : BEGIN_KW {fprintf(yyout, "\nint main() \n{\n");}
 ;
 
 commands
@@ -111,11 +119,11 @@ command
 ;
 
 assignment
-    : WORD ASSIGN NUMBER {fprintf(yyout, "we assign value %d to var %s\n", $3, $1);}
+    : WORD ASSIGN NUMBER {fprintf(yyout, "%s = %d;\n", $1, $3);}
 ;
 
 prog_block_end
-    : END_KW DOT {fprintf(yyout, "program end\n");}
+    : END_KW DOT {fprintf(yyout, "return 0;\n}");}
 ;
 
 %%
@@ -123,7 +131,8 @@ prog_block_end
 int main()
 {
     yyin = fopen("source.txt", "r");
-    yyout = fopen("output.txt", "w");
+    yyout = fopen("output.c", "w");
+
     return yyparse();
 }
 

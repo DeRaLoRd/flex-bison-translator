@@ -79,11 +79,9 @@ extern FILE* yyout;
 int yylex();
 void yyerror(char* s);
 
-int yydebug = 1;
-
 
 /* Line 189 of yacc.c  */
-#line 87 "translate.tab.c"
+#line 85 "translate.tab.c"
 
 /* Enabling traces.  */
 #ifndef YYDEBUG
@@ -191,7 +189,7 @@ typedef union YYSTYPE
 {
 
 /* Line 214 of yacc.c  */
-#line 14 "translate.y"
+#line 12 "translate.y"
 
     int ival;
     double fval;
@@ -200,7 +198,7 @@ typedef union YYSTYPE
 
 
 /* Line 214 of yacc.c  */
-#line 204 "translate.tab.c"
+#line 202 "translate.tab.c"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
@@ -212,7 +210,7 @@ typedef union YYSTYPE
 
 
 /* Line 264 of yacc.c  */
-#line 216 "translate.tab.c"
+#line 214 "translate.tab.c"
 
 #ifdef short
 # undef short
@@ -509,9 +507,9 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    55,    55,    59,    62,    64,    68,    71,    73,    77,
-      81,    82,    83,    84,    85,    86,    87,    88,    89,    90,
-      91,    92,    93,    97,   101,   104,   106,   110,   114,   118
+       0,    53,    53,    57,    70,    72,    76,    79,    81,    85,
+      89,    90,    91,    92,    93,    94,    95,    96,    97,    98,
+      99,   100,   101,   105,   109,   112,   114,   118,   122,   126
 };
 #endif
 
@@ -1458,49 +1456,59 @@ yyreduce:
         case 3:
 
 /* Line 1455 of yacc.c  */
-#line 59 "translate.y"
-    {fprintf(yyout, "we hav programm %s\n", (yyvsp[(2) - (3)].cval));;}
+#line 57 "translate.y"
+    {
+        fprintf(yyout, "/* Translated through PTSD - Pascal To \"Si\" translaDor\n" \
+                       " * By Vasiliy Tarasevich 2024\n" \
+                       " * Original programme name - %s\n" \
+                       " */\n\n", (yyvsp[(2) - (3)].cval));
+
+        fprintf(yyout, "#include <stdio.h>\n" \
+                       "#include <stdlib.h>\n" \
+                       "#include <string.h>\n" \
+                       "#include <stddef.h>\n\n");
+    ;}
     break;
 
   case 6:
 
 /* Line 1455 of yacc.c  */
-#line 68 "translate.y"
-    {fprintf(yyout, "we hav vars such as:\n");;}
+#line 76 "translate.y"
+    {fprintf(yyout, "// Global declarations\n");;}
     break;
 
   case 9:
 
 /* Line 1455 of yacc.c  */
-#line 77 "translate.y"
-    {fprintf(yyout, "%s of type %s\n", (yyvsp[(1) - (4)].cval), (yyvsp[(3) - (4)].cval));;}
+#line 85 "translate.y"
+    {fprintf(yyout, "%s %s;\n", (yyvsp[(3) - (4)].cval), (yyvsp[(1) - (4)].cval));;}
     break;
 
   case 24:
 
 /* Line 1455 of yacc.c  */
-#line 101 "translate.y"
-    {fprintf(yyout, "program began and we do:\n");;}
+#line 109 "translate.y"
+    {fprintf(yyout, "\nint main() \n{\n");;}
     break;
 
   case 28:
 
 /* Line 1455 of yacc.c  */
-#line 114 "translate.y"
-    {fprintf(yyout, "we assign value %d to var %s\n", (yyvsp[(3) - (3)].ival), (yyvsp[(1) - (3)].cval));;}
+#line 122 "translate.y"
+    {fprintf(yyout, "%s = %d;\n", (yyvsp[(1) - (3)].cval), (yyvsp[(3) - (3)].ival));;}
     break;
 
   case 29:
 
 /* Line 1455 of yacc.c  */
-#line 118 "translate.y"
-    {fprintf(yyout, "program end\n");;}
+#line 126 "translate.y"
+    {fprintf(yyout, "return 0;\n}");;}
     break;
 
 
 
 /* Line 1455 of yacc.c  */
-#line 1504 "translate.tab.c"
+#line 1512 "translate.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1712,13 +1720,14 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 121 "translate.y"
+#line 129 "translate.y"
 
 
 int main()
 {
     yyin = fopen("source.txt", "r");
-    yyout = fopen("output.txt", "w");
+    yyout = fopen("output.c", "w");
+
     return yyparse();
 }
 

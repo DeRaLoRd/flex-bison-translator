@@ -286,7 +286,7 @@ static void yy_fatal_error YY_PROTO(( yyconst char msg[] ));
 #define YY_END_OF_BUFFER 74
 static yyconst short int yy_accept[235] =
     {   0,
-       72,   72,   74,   72,    7,   73,   49,   43,   44,   51,
+       72,   72,   74,   72,    7,    7,   49,   43,   44,   51,
        52,   53,   67,   54,   69,   66,   65,   60,   57,   59,
        71,   71,   45,   46,   71,   71,   71,   71,   71,   71,
        71,   71,   71,   71,   71,   71,   71,   71,   71,   71,
@@ -660,7 +660,7 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
 
-#line 94 "translate.l"
+#line 93 "translate.l"
 
 #line 666 "lex.yy.c"
 
@@ -747,367 +747,367 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 95 "translate.l"
+#line 94 "translate.l"
 {return PROGRAM_START;}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 96 "translate.l"
+#line 95 "translate.l"
 {return USES_KW;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 97 "translate.l"
+#line 96 "translate.l"
 {return VAR_KW;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 98 "translate.l"
+#line 97 "translate.l"
 {return CONST_KW;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 99 "translate.l"
+#line 98 "translate.l"
 {return BEGIN_KW;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 100 "translate.l"
+#line 99 "translate.l"
 {return END_KW;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 102 "translate.l"
+#line 101 "translate.l"
 ;
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 104 "translate.l"
+#line 103 "translate.l"
 {return AND_KW;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 105 "translate.l"
+#line 104 "translate.l"
 {return OR_KW;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 106 "translate.l"
+#line 105 "translate.l"
 {return NOT_KW;}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 107 "translate.l"
+#line 106 "translate.l"
 {return XOR_KW;}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 109 "translate.l"
+#line 108 "translate.l"
 {return IF_KW;}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 110 "translate.l"
+#line 109 "translate.l"
 {return THEN_KW;}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 111 "translate.l"
+#line 110 "translate.l"
 {return ELSE_KW;}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 112 "translate.l"
+#line 111 "translate.l"
 {return LOOP_KW;}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 113 "translate.l"
+#line 112 "translate.l"
 {return WHILE_KW;}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 114 "translate.l"
+#line 113 "translate.l"
 {return DO_KW;}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 115 "translate.l"
+#line 114 "translate.l"
 {return FOR_KW;}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 116 "translate.l"
+#line 115 "translate.l"
 {return TO_KW;}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 117 "translate.l"
+#line 116 "translate.l"
 {return DOWNTO_KW;}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 118 "translate.l"
+#line 117 "translate.l"
 {return REPEAT_KW;}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 119 "translate.l"
+#line 118 "translate.l"
 {return UNTIL_KW;}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 120 "translate.l"
+#line 119 "translate.l"
 {return BREAK_KW;}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 121 "translate.l"
+#line 120 "translate.l"
 {return CONTINUE_KW;}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 123 "translate.l"
+#line 122 "translate.l"
 {return COMMENT;}
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 125 "translate.l"
+#line 124 "translate.l"
 {return WRITE_F;}
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 126 "translate.l"
+#line 125 "translate.l"
 {return WRITELN_F;}
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 127 "translate.l"
+#line 126 "translate.l"
 {return READ_F;}
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 128 "translate.l"
+#line 127 "translate.l"
 {return READLN_F;}
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 130 "translate.l"
+#line 129 "translate.l"
 {yylval.cval = "unsigned char"; return UCHAR_T;}
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 131 "translate.l"
+#line 130 "translate.l"
 {yylval.cval = "char"; return CHAR_T;}
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 132 "translate.l"
+#line 131 "translate.l"
 {yylval.cval = "unsigned short"; return USHORT_T;}
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 133 "translate.l"
+#line 132 "translate.l"
 {yylval.cval = "short"; return SHORT_T;}
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 134 "translate.l"
+#line 133 "translate.l"
 {yylval.cval = "unsigned int"; return UINT_T;}
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 135 "translate.l"
+#line 134 "translate.l"
 {yylval.cval = "int"; return INT_T;}
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 136 "translate.l"
+#line 135 "translate.l"
 {yylval.cval = "unsigned long"; return ULONG_T;}
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 137 "translate.l"
+#line 136 "translate.l"
 {yylval.cval = "long"; return LONG_T;}
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 138 "translate.l"
+#line 137 "translate.l"
 {yylval.cval = "long long"; return LONG_LONG_T;}
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 140 "translate.l"
+#line 139 "translate.l"
 {yylval.cval = "float"; return FLOAT_T;}
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 141 "translate.l"
+#line 140 "translate.l"
 {yylval.cval = "double"; return DOUBLE_T;}
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 143 "translate.l"
+#line 142 "translate.l"
 {yylval.cval = "wchar_t"; return WCHAR_T;}
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 144 "translate.l"
+#line 143 "translate.l"
 {yylval.cval = "char*"; return STRING_T;}
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 146 "translate.l"
+#line 145 "translate.l"
 {return OPEN_BR;}
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 147 "translate.l"
+#line 146 "translate.l"
 {return CLOSE_BR;}
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 148 "translate.l"
+#line 147 "translate.l"
 {return OPEN_SQUARE;}
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 149 "translate.l"
+#line 148 "translate.l"
 {return CLOSE_SQUARE;}
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 150 "translate.l"
+#line 149 "translate.l"
 {return OPEN_CURLY;}
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 151 "translate.l"
+#line 150 "translate.l"
 {return CLOSE_CURLY;}
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 152 "translate.l"
+#line 151 "translate.l"
 {return QUOTE;}
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 154 "translate.l"
+#line 153 "translate.l"
 {return ASSIGN;}
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 156 "translate.l"
+#line 155 "translate.l"
 {return ASTERISK;}
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 157 "translate.l"
+#line 156 "translate.l"
 {return PLUS;}
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 158 "translate.l"
+#line 157 "translate.l"
 {return MINUS;}
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 159 "translate.l"
+#line 158 "translate.l"
 {return DIV_F;}
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
-#line 160 "translate.l"
+#line 159 "translate.l"
 {return DIV_KW;}
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
-#line 161 "translate.l"
+#line 160 "translate.l"
 {return MOD_KW;}
 	YY_BREAK
 case 57:
 YY_RULE_SETUP
-#line 162 "translate.l"
+#line 161 "translate.l"
 {return EQUALS;}
 	YY_BREAK
 case 58:
 YY_RULE_SETUP
-#line 163 "translate.l"
+#line 162 "translate.l"
 {return NOT_EQUAL;}
 	YY_BREAK
 case 59:
 YY_RULE_SETUP
-#line 164 "translate.l"
+#line 163 "translate.l"
 {return LESS_THAN;}
 	YY_BREAK
 case 60:
 YY_RULE_SETUP
-#line 165 "translate.l"
+#line 164 "translate.l"
 {return GREATER_THAN;}
 	YY_BREAK
 case 61:
 YY_RULE_SETUP
-#line 166 "translate.l"
+#line 165 "translate.l"
 {return LESS_OR_EQUALS;}
 	YY_BREAK
 case 62:
 YY_RULE_SETUP
-#line 167 "translate.l"
+#line 166 "translate.l"
 {return GREATER_OR_EQUALS;}
 	YY_BREAK
 case 63:
 YY_RULE_SETUP
-#line 169 "translate.l"
+#line 168 "translate.l"
 {return PROCEDURE_KW;}
 	YY_BREAK
 case 64:
 YY_RULE_SETUP
-#line 170 "translate.l"
+#line 169 "translate.l"
 {return FUNCTION_KW;}
 	YY_BREAK
 case 65:
 YY_RULE_SETUP
-#line 172 "translate.l"
+#line 171 "translate.l"
 {return SEMICOLON;}
 	YY_BREAK
 case 66:
 YY_RULE_SETUP
-#line 173 "translate.l"
+#line 172 "translate.l"
 {return COLON;}
 	YY_BREAK
 case 67:
 YY_RULE_SETUP
-#line 174 "translate.l"
+#line 173 "translate.l"
 {return DOT;}
 	YY_BREAK
 case 68:
 YY_RULE_SETUP
-#line 175 "translate.l"
+#line 174 "translate.l"
 {return RANGE;}
 	YY_BREAK
 case 69:
 YY_RULE_SETUP
-#line 177 "translate.l"
+#line 176 "translate.l"
 {yylval.ival = atoi(yytext); return NUMBER;}
 	YY_BREAK
 case 70:
 YY_RULE_SETUP
-#line 178 "translate.l"
+#line 177 "translate.l"
 {yylval.fval = atof(yytext); return NUMBERF;}
 	YY_BREAK
 case 71:
 YY_RULE_SETUP
-#line 179 "translate.l"
+#line 178 "translate.l"
 {yylval.cval = strdup(yytext); return WORD;}
 	YY_BREAK
 case 72:
 YY_RULE_SETUP
-#line 180 "translate.l"
+#line 179 "translate.l"
 {return OTHER;}
 	YY_BREAK
 case 73:
 YY_RULE_SETUP
-#line 181 "translate.l"
+#line 180 "translate.l"
 ECHO;
 	YY_BREAK
 #line 1114 "lex.yy.c"
@@ -1996,7 +1996,7 @@ int main()
 	return 0;
 	}
 #endif
-#line 181 "translate.l"
+#line 180 "translate.l"
 
 
 int yywrap() {

@@ -46,8 +46,7 @@ cl_sq_br    \]
 o_c_br      \{
 cl_c_br     \}
 quote       \'
-delim       [ \t]
-newline     \n
+delim       [ \t\n]
 
 aster       \*
 plus        \+
