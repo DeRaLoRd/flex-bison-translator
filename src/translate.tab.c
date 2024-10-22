@@ -68,7 +68,7 @@
 /* Copy the first part of user declarations.  */
 
 /* Line 189 of yacc.c  */
-#line 1 "test.y"
+#line 1 "translate.y"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -81,7 +81,7 @@ void yyerror(char* s);
 
 
 /* Line 189 of yacc.c  */
-#line 85 "test.tab.c"
+#line 85 "translate.tab.c"
 
 /* Enabling traces.  */
 #ifndef YYDEBUG
@@ -129,7 +129,7 @@ typedef union YYSTYPE
 {
 
 /* Line 214 of yacc.c  */
-#line 12 "test.y"
+#line 12 "translate.y"
 
     int ival;
     char* cval;
@@ -137,7 +137,7 @@ typedef union YYSTYPE
 
 
 /* Line 214 of yacc.c  */
-#line 141 "test.tab.c"
+#line 141 "translate.tab.c"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
@@ -149,7 +149,7 @@ typedef union YYSTYPE
 
 
 /* Line 264 of yacc.c  */
-#line 153 "test.tab.c"
+#line 153 "translate.tab.c"
 
 #ifdef short
 # undef short
@@ -1350,49 +1350,49 @@ yyreduce:
         case 3:
 
 /* Line 1455 of yacc.c  */
-#line 29 "test.y"
+#line 29 "translate.y"
     {fprintf(yyout, "we hav programm %s\n", (yyvsp[(2) - (3)].cval));;}
     break;
 
   case 6:
 
 /* Line 1455 of yacc.c  */
-#line 38 "test.y"
+#line 38 "translate.y"
     {fprintf(yyout, "we hav vars such as:\n");;}
     break;
 
   case 9:
 
 /* Line 1455 of yacc.c  */
-#line 47 "test.y"
+#line 47 "translate.y"
     {fprintf(yyout, "we hav var %s of type %s\n", (yyvsp[(1) - (4)].cval), (yyvsp[(3) - (4)].cval));;}
     break;
 
   case 12:
 
 /* Line 1455 of yacc.c  */
-#line 59 "test.y"
+#line 59 "translate.y"
     {fprintf(yyout, "program began and we do:\n");;}
     break;
 
   case 16:
 
 /* Line 1455 of yacc.c  */
-#line 72 "test.y"
+#line 72 "translate.y"
     {fprintf(yyout, "we assign value %d to var %s\n", (yyvsp[(3) - (3)].ival), (yyvsp[(1) - (3)].cval));;}
     break;
 
   case 17:
 
 /* Line 1455 of yacc.c  */
-#line 76 "test.y"
+#line 76 "translate.y"
     {fprintf(yyout, "program end\n");;}
     break;
 
 
 
 /* Line 1455 of yacc.c  */
-#line 1396 "test.tab.c"
+#line 1396 "translate.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1604,7 +1604,7 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 79 "test.y"
+#line 79 "translate.y"
 
 
 int main()

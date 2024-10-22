@@ -1,11 +1,12 @@
 we hav programm Source
 
+we hav vars such as:
 
 we hav var x of type int
 
 
-we hav vars such as:
+program began and we do:
 
 we assign value 2 to var x
 
-program began and we do:
+program end

@@ -31,7 +31,11 @@ start_block
 
 var_block
     : /* empty */
-    | VAR_KW var_decls {fprintf(yyout, "we hav vars such as:\n");}
+    | var_block_begin var_decls 
+;
+
+var_block_begin
+    : VAR_KW {fprintf(yyout, "we hav vars such as:\n");}
 ;
 
 var_decls
@@ -48,7 +52,11 @@ var_type
 ;
 
 prog_block
-    : BEGIN_KW commands END_KW DOT {fprintf(yyout, "program began and we do:\n");}
+    : prog_block_begin commands prog_block_end 
+;
+
+prog_block_begin
+    : BEGIN_KW {fprintf(yyout, "program began and we do:\n");}
 ;
 
 commands
@@ -62,6 +70,10 @@ command
 
 assignment
     : WORD ASSIGN NUMBER {fprintf(yyout, "we assign value %d to var %s\n", $3, $1);}
+;
+
+prog_block_end
+    : END_KW DOT {fprintf(yyout, "program end\n");}
 ;
 
 %%
