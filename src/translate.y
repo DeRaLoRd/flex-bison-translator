@@ -44,7 +44,7 @@ int yydebug = 1;
 %type<cval> ID WORD INT_T USHORT_T SHORT_T UINT_T ULONG_T LONG_T LONG_LONG_T FLOAT_T DOUBLE_T
 %type<cval> NUMBER NUMBERF
 %type<cval> UCHAR_T CHAR_T WCHAR_T STRING_T
-%type<cval> gen_var_type int_var_type float_var_type int_expr
+%type<cval> gen_var_type int_var_type float_var_type num_expr
 
 %left PLUS MINUS ASTERISK DIV_F DIV_KW MOD_KW
 
@@ -160,17 +160,24 @@ commands
 ;
 
 command
-    : int_assignment SEMICOLON;
+    : num_assignment SEMICOLON
 ;
 
-int_assignment
-    : ID ASSIGN int_expr {fprintf(yyout, "\t%s = %s;\n", $1, $3);}
+num_assignment
+    : ID ASSIGN num_expr {fprintf(yyout, "\t%s = %s;\n", $1, $3);}
 ;
 
-int_expr
+num_expr
     : NUMBER                        {sprintf($$, "%s", $1);}
-;
-
+    | NUMBERF                       {sprintf($$, "%s", $1);}
+    | OPEN_BR num_expr CLOSE_BR     {sprintf($$, "(%s)", $2);}
+    | num_expr PLUS num_expr        {sprintf($$, "%s + %s", $1, $3);}
+    | num_expr MINUS num_expr       {sprintf($$, "%s - %s", $1, $3);}
+    | num_expr ASTERISK num_expr    {sprintf($$, "%s * %s", $1, $3);}
+    | num_expr DIV_F num_expr       {sprintf($$, "%s / %s", $1, $3);}
+    | num_expr DIV_KW num_expr      {sprintf($$, "%s / %s", $1, $3);}
+    | num_expr MOD_KW num_expr      {sprintf($$, "%s %% %s", $1, $3);}
+;   
 
 prog_block_end
     : END_KW DOT {fprintf(yyout, "\treturn 0;\n}");}
