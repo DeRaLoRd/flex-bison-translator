@@ -7,7 +7,8 @@
 
 num         [0-9]+
 numf        [0-9]+\.[0-9]+
-word        [a-zA-Z_][a-zA-Z0-9_]*
+id          [a-zA-Z_][a-zA-Z0-9_]*
+word        \'.*\'
 
 pr_start    Program
 var         var
@@ -173,10 +174,10 @@ range       \.\.
 {dot}       {return DOT;}
 {range}     {return RANGE;}
 
-{num}       {yylval.ival = atoi(yytext); return NUMBER;}
-{numf}      {yylval.fval = atof(yytext); return NUMBERF;}
+{num}       {yylval.cval = strdup(yytext); return NUMBER;}
+{numf}      {yylval.cval = strdup(yytext); return NUMBERF;}
+{id}        {yylval.cval = strdup(yytext); return ID;}
 {word}      {yylval.cval = strdup(yytext); return WORD;}
-.?          {return OTHER;}
 %%
 
 int yywrap() {

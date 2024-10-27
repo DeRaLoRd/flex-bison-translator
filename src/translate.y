@@ -1,17 +1,18 @@
 %{
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 extern FILE* yyin;
 extern FILE* yyout;
 
 int yylex();
 void yyerror(char* s);
+
+int yydebug = 1;
 %}
 
 %union {
-    int ival;
-    double fval;
     char* cval;
 }
 
@@ -38,23 +39,25 @@ void yyerror(char* s);
 
 %token SEMICOLON COLON DOT RANGE 
 
-%token NUMBER NUMBERF WORD OTHER
+%token NUMBER NUMBERF ID WORD
 
-%type<ival> NUMBER
-%type<cval> WORD INT_T USHORT_T SHORT_T UINT_T ULONG_T LONG_T LONG_LONG_T FLOAT_T DOUBLE_T 
-%type<cval> UCHAR_T CHAR_T WCHAR_T STRING_T var_type
-%type<fval> NUMBERF
+%type<cval> ID WORD INT_T USHORT_T SHORT_T UINT_T ULONG_T LONG_T LONG_LONG_T FLOAT_T DOUBLE_T
+%type<cval> NUMBER NUMBERF
+%type<cval> UCHAR_T CHAR_T WCHAR_T STRING_T
+%type<cval> gen_var_type int_var_type float_var_type int_expr
+
+%left PLUS MINUS ASTERISK DIV_F DIV_KW MOD_KW
 
 %start program
 
 %%
 
 program
-    : start_block var_block prog_block
+    : start_block const_block var_block prog_block
 ;
 
 start_block
-    : PROGRAM_START WORD SEMICOLON {
+    : PROGRAM_START ID SEMICOLON {
         fprintf(yyout, "/* Translated through PTSD - Pascal To \"Si\" translaDor\n" \
                        " * By Vasiliy Tarasevich 2024\n" \
                        " * Original programme name - %s\n" \
@@ -63,7 +66,7 @@ start_block
         fprintf(yyout, "#include <stdio.h>\n" \
                        "#include <stdlib.h>\n" \
                        "#include <string.h>\n" \
-                       "#include <stddef.h>\n\n");
+                       "#include <stddef.h>\n");
     }
 ;
 
@@ -72,20 +75,44 @@ var_block
     | var_block_begin var_decls 
 ;
 
+const_block
+    : /* empty */
+    | const_block_begin const_decls
+;
+
 var_block_begin
-    : VAR_KW {fprintf(yyout, "// Global declarations\n");}
+    : VAR_KW {fprintf(yyout, "\n// Global variables\n");}
 ;
 
 var_decls
     : /* empty */
     | var_decls var_decl
+    | var_decls var_decl_init
 ;
 
 var_decl
-    : WORD COLON var_type SEMICOLON {fprintf(yyout, "%s %s;\n", $3, $1);}
+    : ID COLON gen_var_type SEMICOLON {fprintf(yyout, "%s %s;\n", $3, $1);}
 ;
 
-var_type
+var_decl_init
+    : ID COLON int_var_type EQUALS NUMBER SEMICOLON {fprintf(yyout, "%s %s = %s;\n", $3, $1, $5);}
+    | ID COLON float_var_type EQUALS NUMBERF SEMICOLON {fprintf(yyout, "%s %s = %s;\n", $3, $1, $5);}
+;
+
+const_block_begin
+    : CONST_KW {fprintf(yyout, "\n// Global constants\n");}
+;
+
+const_decls
+    : /* empty */
+    | const_decls const_decl
+;
+
+const_decl
+    : ID COLON int_var_type EQUALS NUMBER SEMICOLON {fprintf(yyout, "const %s %s = %s;\n", $3, $1, $5);}
+;
+
+gen_var_type
     : CHAR_T
     | UCHAR_T
     | WCHAR_T
@@ -101,6 +128,24 @@ var_type
     | STRING_T
 ;
 
+int_var_type
+    : CHAR_T
+    | UCHAR_T
+    | SHORT_T
+    | USHORT_T
+    | INT_T
+    | UINT_T
+    | LONG_T
+    | ULONG_T
+    | LONG_LONG_T
+;
+
+float_var_type
+    : FLOAT_T
+    | DOUBLE_T
+;
+
+
 prog_block
     : prog_block_begin commands prog_block_end 
 ;
@@ -115,15 +160,20 @@ commands
 ;
 
 command
-    : assignment SEMICOLON
+    : int_assignment SEMICOLON;
 ;
 
-assignment
-    : WORD ASSIGN NUMBER {fprintf(yyout, "%s = %d;\n", $1, $3);}
+int_assignment
+    : ID ASSIGN int_expr {fprintf(yyout, "\t%s = %s;\n", $1, $3);}
 ;
+
+int_expr
+    : NUMBER                        {sprintf($$, "%s", $1);}
+;
+
 
 prog_block_end
-    : END_KW DOT {fprintf(yyout, "return 0;\n}");}
+    : END_KW DOT {fprintf(yyout, "\treturn 0;\n}");}
 ;
 
 %%

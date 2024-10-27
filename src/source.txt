@@ -1,7 +1,13 @@
 Program Source;
+
+const
+    bidorasy: integer = 4;
+
 var
-    x: integer;
-    y:real;
+    x: integer = 3;
+    y : real = 2.3;
+    z: smallint = 52;
+
 
 begin
     x := 2;

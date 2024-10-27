@@ -8,13 +8,17 @@
 #include <string.h>
 #include <stddef.h>
 
-// Global declarations
-int x;
-double y;
+// Global constants
+const int bidorasy = 4;
+
+// Global variables
+int x = 3;
+double y = 2.3;
+short z = 52;
 
 int main() 
 {
-x = 2;
-y = 3;
-return 0;
+	x = 2;
+	y = 3;
+	return 0;
 }

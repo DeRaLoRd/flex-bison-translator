@@ -108,8 +108,8 @@
      RANGE = 324,
      NUMBER = 325,
      NUMBERF = 326,
-     WORD = 327,
-     OTHER = 328
+     ID = 327,
+     WORD = 328
    };
 #endif
 
@@ -120,16 +120,14 @@ typedef union YYSTYPE
 {
 
 /* Line 1676 of yacc.c  */
-#line 12 "translate.y"
+#line 15 "translate.y"
 
-    int ival;
-    double fval;
     char* cval;
 
 
 
 /* Line 1676 of yacc.c  */
-#line 133 "translate.tab.h"
+#line 131 "translate.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
