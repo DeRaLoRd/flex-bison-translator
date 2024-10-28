@@ -16,7 +16,7 @@ int x = 3;
 double y = 2.3;
 short z = 52;
 
-int main() 
+int main()
 {
 	x = 2.3 + 3 * 2;
 	y = 3 % 8 * (15 - 66);

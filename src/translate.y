@@ -9,7 +9,7 @@ extern FILE* yyout;
 int yylex();
 void yyerror(char* s);
 
-int yydebug = 1;
+int yydebug = 0;
 %}
 
 %union {
@@ -44,9 +44,12 @@ int yydebug = 1;
 %type<cval> ID WORD INT_T USHORT_T SHORT_T UINT_T ULONG_T LONG_T LONG_LONG_T FLOAT_T DOUBLE_T
 %type<cval> NUMBER NUMBERF
 %type<cval> UCHAR_T CHAR_T WCHAR_T STRING_T
-%type<cval> gen_var_type int_var_type float_var_type num_expr
+%type<cval> gen_var_type int_var_type float_var_type 
+%type<cval> num_assignment expr prog_block_end
 
-%left PLUS MINUS ASTERISK DIV_F DIV_KW MOD_KW
+%left PLUS MINUS ASTERISK DIV_F DIV_KW MOD_KW GREATER_OR_EQUALS GREATER_THAN LESS_OR_EQUALS LESS_THAN
+%left AND_KW OR_KW XOR_KW
+%right EQUALS NOT_EQUAL NOT_KW
 
 %start program
 
@@ -145,13 +148,12 @@ float_var_type
     | DOUBLE_T
 ;
 
-
 prog_block
-    : prog_block_begin commands prog_block_end 
+    : prog_block_begin commands prog_block_end
 ;
 
 prog_block_begin
-    : BEGIN_KW {fprintf(yyout, "\nint main() \n{\n");}
+    : BEGIN_KW {fprintf(yyout, "\nint main()\n{\n");}
 ;
 
 commands
@@ -160,25 +162,35 @@ commands
 ;
 
 command
-    : num_assignment SEMICOLON
+    : num_assignment SEMICOLON  {fprintf(yyout, "\t%s;\n", $1);}
 ;
 
 num_assignment
-    : ID ASSIGN num_expr {fprintf(yyout, "\t%s = %s;\n", $1, $3);}
+    : ID ASSIGN expr {sprintf($$, "%s = %s", $1, $3);}
 ;
 
-num_expr
-    : NUMBER                        {sprintf($$, "%s", $1);}
-    | NUMBERF                       {sprintf($$, "%s", $1);}
-    | ID                            {sprintf($$, "%s", $1);}
-    | OPEN_BR num_expr CLOSE_BR     {sprintf($$, "(%s)", $2);}
-    | num_expr PLUS num_expr        {sprintf($$, "%s + %s", $1, $3);}
-    | num_expr MINUS num_expr       {sprintf($$, "%s - %s", $1, $3);}
-    | num_expr ASTERISK num_expr    {sprintf($$, "%s * %s", $1, $3);}
-    | num_expr DIV_F num_expr       {sprintf($$, "%s / %s", $1, $3);}
-    | num_expr DIV_KW num_expr      {sprintf($$, "%s / %s", $1, $3);}
-    | num_expr MOD_KW num_expr      {sprintf($$, "%s %% %s", $1, $3);}
-;   
+expr
+    : NUMBER                    {sprintf($$, "%s", $1);}
+    | NUMBERF                   {sprintf($$, "%s", $1);}
+    | ID                        {sprintf($$, "%s", $1);}
+    | OPEN_BR expr CLOSE_BR     {sprintf($$, "(%s)", $2);}
+    | expr PLUS expr            {sprintf($$, "%s + %s", $1, $3);}
+    | expr MINUS expr           {sprintf($$, "%s - %s", $1, $3);}
+    | expr ASTERISK expr        {sprintf($$, "%s * %s", $1, $3);}
+    | expr DIV_F expr           {sprintf($$, "%s / %s", $1, $3);}
+    | expr DIV_KW expr              {sprintf($$, "%s / %s", $1, $3);}
+    | expr MOD_KW expr              {sprintf($$, "%s %% %s", $1, $3);}
+    | expr GREATER_THAN expr        {sprintf($$, "%s > %s", $1, $3);}
+    | expr GREATER_OR_EQUALS expr   {sprintf($$, "%s >= %s", $1, $3);}
+    | expr LESS_THAN expr           {sprintf($$, "%s >= %s", $1, $3);}
+    | expr LESS_OR_EQUALS expr      {sprintf($$, "%s >= %s", $1, $3);}
+    | expr EQUALS expr              {sprintf($$, "%s = %s", $1, $3);}
+    | expr NOT_EQUAL expr   {sprintf($$, "%s != %s", $1, $3);}
+    | expr AND_KW expr      {sprintf($$, "%s && %s", $1, $3);}
+    | expr OR_KW expr       {sprintf($$, "%s || %s", $1, $3);}
+    | expr XOR_KW expr      {sprintf($$, "%s ^ %s", $1, $3);}
+    | NOT_KW expr           {sprintf($$, "!%s", $2);}
+;
 
 prog_block_end
     : END_KW DOT {fprintf(yyout, "\treturn 0;\n}");}
@@ -196,5 +208,5 @@ int main()
 
 void yyerror(char* s)
 {
-    fprintf(yyout, "%s", s);
+    printf("%s", s);
 }
