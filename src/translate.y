@@ -170,6 +170,7 @@ num_assignment
 num_expr
     : NUMBER                        {sprintf($$, "%s", $1);}
     | NUMBERF                       {sprintf($$, "%s", $1);}
+    | ID                            {sprintf($$, "%s", $1);}
     | OPEN_BR num_expr CLOSE_BR     {sprintf($$, "(%s)", $2);}
     | num_expr PLUS num_expr        {sprintf($$, "%s + %s", $1, $3);}
     | num_expr MINUS num_expr       {sprintf($$, "%s - %s", $1, $3);}
