@@ -7,7 +7,4 @@ fl:
 	flex $(NAME).l
 
 bs:
-	bison --debug -d $(NAME).y 
-
-run: main
-	$(NAME)
+	bison --debug -d $(NAME).y
