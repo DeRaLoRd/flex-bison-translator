@@ -1,0 +1,1782 @@
+Terminals unused in grammar
+
+   USES_KW
+   COMMENT
+   WRITE_F
+   WRITELN_F
+   READ_F
+   READLN_F
+   OPEN_SQUARE
+   CLOSE_SQUARE
+   OPEN_CURLY
+   CLOSE_CURLY
+   QUOTE
+   LOOP_KW
+   WHILE_KW
+   DO_KW
+   FOR_KW
+   TO_KW
+   DOWNTO_KW
+   REPEAT_KW
+   UNTIL_KW
+   BREAK_KW
+   CONTINUE_KW
+   PROCEDURE_KW
+   FUNCTION_KW
+   RANGE
+   WORD
+
+
+Состояние 54 конфликты: 1 сдвига/вывода
+
+
+Грамматика
+
+    0 $accept: program $end
+
+    1 program: start_block const_block var_block prog_block
+
+    2 start_block: PROGRAM_START ID SEMICOLON
+
+    3 var_block: /* пусто */
+    4          | var_block_begin var_decls
+
+    5 const_block: /* пусто */
+    6            | const_block_begin const_decls
+
+    7 var_block_begin: VAR_KW
+
+    8 var_decls: /* пусто */
+    9          | var_decls var_decl
+   10          | var_decls var_decl_init
+
+   11 var_decl: ID COLON gen_var_type SEMICOLON
+
+   12 var_decl_init: ID COLON int_var_type EQUALS NUMBER SEMICOLON
+   13              | ID COLON float_var_type EQUALS NUMBERF SEMICOLON
+
+   14 const_block_begin: CONST_KW
+
+   15 const_decls: /* пусто */
+   16            | const_decls const_decl
+
+   17 const_decl: ID COLON int_var_type EQUALS NUMBER SEMICOLON
+
+   18 gen_var_type: CHAR_T
+   19             | UCHAR_T
+   20             | WCHAR_T
+   21             | SHORT_T
+   22             | USHORT_T
+   23             | INT_T
+   24             | UINT_T
+   25             | LONG_T
+   26             | ULONG_T
+   27             | LONG_LONG_T
+   28             | FLOAT_T
+   29             | DOUBLE_T
+   30             | STRING_T
+
+   31 int_var_type: CHAR_T
+   32             | UCHAR_T
+   33             | SHORT_T
+   34             | USHORT_T
+   35             | INT_T
+   36             | UINT_T
+   37             | LONG_T
+   38             | ULONG_T
+   39             | LONG_LONG_T
+
+   40 float_var_type: FLOAT_T
+   41               | DOUBLE_T
+
+   42 prog_block: prog_block_begin commands prog_block_end
+
+   43 prog_block_begin: BEGIN_KW
+
+   44 commands: /* пусто */
+   45         | commands command
+
+   46 command: num_assignment SEMICOLON
+   47        | if_stmt
+
+   48 if_stmt: if_stmt_begin commands_block if_stmt_end
+   49        | if_stmt_begin commands_block ELSE_KW commands_block
+
+   50 if_stmt_begin: IF_KW expr THEN_KW
+
+   51 if_stmt_end: /* пусто */
+
+   52 commands_block: command
+   53               | BEGIN_KW commands END_KW SEMICOLON
+
+   54 num_assignment: ID ASSIGN expr
+
+   55 expr: NUMBER
+   56     | NUMBERF
+   57     | ID
+   58     | OPEN_BR expr CLOSE_BR
+   59     | expr PLUS expr
+   60     | expr MINUS expr
+   61     | expr ASTERISK expr
+   62     | expr DIV_F expr
+   63     | expr DIV_KW expr
+   64     | expr MOD_KW expr
+   65     | expr GREATER_THAN expr
+   66     | expr GREATER_OR_EQUALS expr
+   67     | expr LESS_THAN expr
+   68     | expr LESS_OR_EQUALS expr
+   69     | expr EQUALS expr
+   70     | expr NOT_EQUAL expr
+   71     | expr AND_KW expr
+   72     | expr OR_KW expr
+   73     | expr XOR_KW expr
+   74     | NOT_KW expr
+
+   75 prog_block_end: END_KW DOT
+
+
+Терминальные символы с правилами, в которых они появляются
+
+$end (0) 0
+error (256)
+PROGRAM_START (258) 2
+USES_KW (259)
+VAR_KW (260) 7
+CONST_KW (261) 14
+BEGIN_KW (262) 43 53
+END_KW (263) 53 75
+COMMENT (264)
+WRITE_F (265)
+WRITELN_F (266)
+READ_F (267)
+READLN_F (268)
+USHORT_T (269) 22 34
+SHORT_T (270) 21 33
+UINT_T (271) 24 36
+INT_T (272) 23 35
+ULONG_T (273) 26 38
+LONG_T (274) 25 37
+LONG_LONG_T (275) 27 39
+FLOAT_T (276) 28 40
+DOUBLE_T (277) 29 41
+UCHAR_T (278) 19 32
+CHAR_T (279) 18 31
+WCHAR_T (280) 20
+STRING_T (281) 30
+OPEN_BR (282) 58
+CLOSE_BR (283) 58
+OPEN_SQUARE (284)
+CLOSE_SQUARE (285)
+OPEN_CURLY (286)
+CLOSE_CURLY (287)
+QUOTE (288)
+ASTERISK (289) 61
+PLUS (290) 59
+MINUS (291) 60
+DIV_F (292) 62
+DIV_KW (293) 63
+MOD_KW (294) 64
+ASSIGN (295) 54
+EQUALS (296) 12 13 17 69
+NOT_EQUAL (297) 70
+LESS_THAN (298) 67
+GREATER_THAN (299) 65
+LESS_OR_EQUALS (300) 68
+GREATER_OR_EQUALS (301) 66
+AND_KW (302) 71
+OR_KW (303) 72
+NOT_KW (304) 74
+XOR_KW (305) 73
+IF_KW (306) 50
+THEN_KW (307) 50
+ELSE_KW (308) 49
+LOOP_KW (309)
+WHILE_KW (310)
+DO_KW (311)
+FOR_KW (312)
+TO_KW (313)
+DOWNTO_KW (314)
+REPEAT_KW (315)
+UNTIL_KW (316)
+BREAK_KW (317)
+CONTINUE_KW (318)
+PROCEDURE_KW (319)
+FUNCTION_KW (320)
+SEMICOLON (321) 2 11 12 13 17 46 53
+COLON (322) 11 12 13 17
+DOT (323) 75
+RANGE (324)
+NUMBER (325) 12 17 55
+NUMBERF (326) 13 56
+ID (327) 2 11 12 13 17 54 57
+WORD (328)
+
+
+Нетерминальные символы с правилами, в которых они появляются
+
+$accept (74)
+    налево: 0
+program (75)
+    налево: 1, направо: 0
+start_block (76)
+    налево: 2, направо: 1
+var_block (77)
+    налево: 3 4, направо: 1
+const_block (78)
+    налево: 5 6, направо: 1
+var_block_begin (79)
+    налево: 7, направо: 4
+var_decls (80)
+    налево: 8 9 10, направо: 4 9 10
+var_decl (81)
+    налево: 11, направо: 9
+var_decl_init (82)
+    налево: 12 13, направо: 10
+const_block_begin (83)
+    налево: 14, направо: 6
+const_decls (84)
+    налево: 15 16, направо: 6 16
+const_decl (85)
+    налево: 17, направо: 16
+gen_var_type (86)
+    налево: 18 19 20 21 22 23 24 25 26 27 28 29 30, направо: 11
+int_var_type (87)
+    налево: 31 32 33 34 35 36 37 38 39, направо: 12 17
+float_var_type (88)
+    налево: 40 41, направо: 13
+prog_block (89)
+    налево: 42, направо: 1
+prog_block_begin (90)
+    налево: 43, направо: 42
+commands (91)
+    налево: 44 45, направо: 42 45 53
+command (92)
+    налево: 46 47, направо: 45 52
+if_stmt (93)
+    налево: 48 49, направо: 47
+if_stmt_begin (94)
+    налево: 50, направо: 48 49
+if_stmt_end (95)
+    налево: 51, направо: 48
+commands_block (96)
+    налево: 52 53, направо: 48 49
+num_assignment (97)
+    налево: 54, направо: 46
+expr (98)
+    налево: 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73
+    74, направо: 50 54 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72
+    73 74
+prog_block_end (99)
+    налево: 75, направо: 42
+
+
+состояние 0
+
+    0 $accept: . program $end
+
+    PROGRAM_START  сдвиг, и переход в состояние 1
+
+    program      переход в состояние 2
+    start_block  переход в состояние 3
+
+
+состояние 1
+
+    2 start_block: PROGRAM_START . ID SEMICOLON
+
+    ID  сдвиг, и переход в состояние 4
+
+
+состояние 2
+
+    0 $accept: program . $end
+
+    $end  сдвиг, и переход в состояние 5
+
+
+состояние 3
+
+    1 program: start_block . const_block var_block prog_block
+
+    CONST_KW  сдвиг, и переход в состояние 6
+
+    $default  вывод с использованием правила 5 (const_block)
+
+    const_block        переход в состояние 7
+    const_block_begin  переход в состояние 8
+
+
+состояние 4
+
+    2 start_block: PROGRAM_START ID . SEMICOLON
+
+    SEMICOLON  сдвиг, и переход в состояние 9
+
+
+состояние 5
+
+    0 $accept: program $end .
+
+    $default  accept
+
+
+состояние 6
+
+   14 const_block_begin: CONST_KW .
+
+    $default  вывод с использованием правила 14 (const_block_begin)
+
+
+состояние 7
+
+    1 program: start_block const_block . var_block prog_block
+
+    VAR_KW  сдвиг, и переход в состояние 10
+
+    $default  вывод с использованием правила 3 (var_block)
+
+    var_block        переход в состояние 11
+    var_block_begin  переход в состояние 12
+
+
+состояние 8
+
+    6 const_block: const_block_begin . const_decls
+
+    $default  вывод с использованием правила 15 (const_decls)
+
+    const_decls  переход в состояние 13
+
+
+состояние 9
+
+    2 start_block: PROGRAM_START ID SEMICOLON .
+
+    $default  вывод с использованием правила 2 (start_block)
+
+
+состояние 10
+
+    7 var_block_begin: VAR_KW .
+
+    $default  вывод с использованием правила 7 (var_block_begin)
+
+
+состояние 11
+
+    1 program: start_block const_block var_block . prog_block
+
+    BEGIN_KW  сдвиг, и переход в состояние 14
+
+    prog_block        переход в состояние 15
+    prog_block_begin  переход в состояние 16
+
+
+состояние 12
+
+    4 var_block: var_block_begin . var_decls
+
+    $default  вывод с использованием правила 8 (var_decls)
+
+    var_decls  переход в состояние 17
+
+
+состояние 13
+
+    6 const_block: const_block_begin const_decls .
+   16 const_decls: const_decls . const_decl
+
+    ID  сдвиг, и переход в состояние 18
+
+    $default  вывод с использованием правила 6 (const_block)
+
+    const_decl  переход в состояние 19
+
+
+состояние 14
+
+   43 prog_block_begin: BEGIN_KW .
+
+    $default  вывод с использованием правила 43 (prog_block_begin)
+
+
+состояние 15
+
+    1 program: start_block const_block var_block prog_block .
+
+    $default  вывод с использованием правила 1 (program)
+
+
+состояние 16
+
+   42 prog_block: prog_block_begin . commands prog_block_end
+
+    $default  вывод с использованием правила 44 (commands)
+
+    commands  переход в состояние 20
+
+
+состояние 17
+
+    4 var_block: var_block_begin var_decls .
+    9 var_decls: var_decls . var_decl
+   10          | var_decls . var_decl_init
+
+    ID  сдвиг, и переход в состояние 21
+
+    $default  вывод с использованием правила 4 (var_block)
+
+    var_decl       переход в состояние 22
+    var_decl_init  переход в состояние 23
+
+
+состояние 18
+
+   17 const_decl: ID . COLON int_var_type EQUALS NUMBER SEMICOLON
+
+    COLON  сдвиг, и переход в состояние 24
+
+
+состояние 19
+
+   16 const_decls: const_decls const_decl .
+
+    $default  вывод с использованием правила 16 (const_decls)
+
+
+состояние 20
+
+   42 prog_block: prog_block_begin commands . prog_block_end
+   45 commands: commands . command
+
+    END_KW  сдвиг, и переход в состояние 25
+    IF_KW   сдвиг, и переход в состояние 26
+    ID      сдвиг, и переход в состояние 27
+
+    command         переход в состояние 28
+    if_stmt         переход в состояние 29
+    if_stmt_begin   переход в состояние 30
+    num_assignment  переход в состояние 31
+    prog_block_end  переход в состояние 32
+
+
+состояние 21
+
+   11 var_decl: ID . COLON gen_var_type SEMICOLON
+   12 var_decl_init: ID . COLON int_var_type EQUALS NUMBER SEMICOLON
+   13              | ID . COLON float_var_type EQUALS NUMBERF SEMICOLON
+
+    COLON  сдвиг, и переход в состояние 33
+
+
+состояние 22
+
+    9 var_decls: var_decls var_decl .
+
+    $default  вывод с использованием правила 9 (var_decls)
+
+
+состояние 23
+
+   10 var_decls: var_decls var_decl_init .
+
+    $default  вывод с использованием правила 10 (var_decls)
+
+
+состояние 24
+
+   17 const_decl: ID COLON . int_var_type EQUALS NUMBER SEMICOLON
+
+    USHORT_T     сдвиг, и переход в состояние 34
+    SHORT_T      сдвиг, и переход в состояние 35
+    UINT_T       сдвиг, и переход в состояние 36
+    INT_T        сдвиг, и переход в состояние 37
+    ULONG_T      сдвиг, и переход в состояние 38
+    LONG_T       сдвиг, и переход в состояние 39
+    LONG_LONG_T  сдвиг, и переход в состояние 40
+    UCHAR_T      сдвиг, и переход в состояние 41
+    CHAR_T       сдвиг, и переход в состояние 42
+
+    int_var_type  переход в состояние 43
+
+
+состояние 25
+
+   75 prog_block_end: END_KW . DOT
+
+    DOT  сдвиг, и переход в состояние 44
+
+
+состояние 26
+
+   50 if_stmt_begin: IF_KW . expr THEN_KW
+
+    OPEN_BR  сдвиг, и переход в состояние 45
+    NOT_KW   сдвиг, и переход в состояние 46
+    NUMBER   сдвиг, и переход в состояние 47
+    NUMBERF  сдвиг, и переход в состояние 48
+    ID       сдвиг, и переход в состояние 49
+
+    expr  переход в состояние 50
+
+
+состояние 27
+
+   54 num_assignment: ID . ASSIGN expr
+
+    ASSIGN  сдвиг, и переход в состояние 51
+
+
+состояние 28
+
+   45 commands: commands command .
+
+    $default  вывод с использованием правила 45 (commands)
+
+
+состояние 29
+
+   47 command: if_stmt .
+
+    $default  вывод с использованием правила 47 (command)
+
+
+состояние 30
+
+   48 if_stmt: if_stmt_begin . commands_block if_stmt_end
+   49        | if_stmt_begin . commands_block ELSE_KW commands_block
+
+    BEGIN_KW  сдвиг, и переход в состояние 52
+    IF_KW     сдвиг, и переход в состояние 26
+    ID        сдвиг, и переход в состояние 27
+
+    command         переход в состояние 53
+    if_stmt         переход в состояние 29
+    if_stmt_begin   переход в состояние 30
+    commands_block  переход в состояние 54
+    num_assignment  переход в состояние 31
+
+
+состояние 31
+
+   46 command: num_assignment . SEMICOLON
+
+    SEMICOLON  сдвиг, и переход в состояние 55
+
+
+состояние 32
+
+   42 prog_block: prog_block_begin commands prog_block_end .
+
+    $default  вывод с использованием правила 42 (prog_block)
+
+
+состояние 33
+
+   11 var_decl: ID COLON . gen_var_type SEMICOLON
+   12 var_decl_init: ID COLON . int_var_type EQUALS NUMBER SEMICOLON
+   13              | ID COLON . float_var_type EQUALS NUMBERF SEMICOLON
+
+    USHORT_T     сдвиг, и переход в состояние 56
+    SHORT_T      сдвиг, и переход в состояние 57
+    UINT_T       сдвиг, и переход в состояние 58
+    INT_T        сдвиг, и переход в состояние 59
+    ULONG_T      сдвиг, и переход в состояние 60
+    LONG_T       сдвиг, и переход в состояние 61
+    LONG_LONG_T  сдвиг, и переход в состояние 62
+    FLOAT_T      сдвиг, и переход в состояние 63
+    DOUBLE_T     сдвиг, и переход в состояние 64
+    UCHAR_T      сдвиг, и переход в состояние 65
+    CHAR_T       сдвиг, и переход в состояние 66
+    WCHAR_T      сдвиг, и переход в состояние 67
+    STRING_T     сдвиг, и переход в состояние 68
+
+    gen_var_type    переход в состояние 69
+    int_var_type    переход в состояние 70
+    float_var_type  переход в состояние 71
+
+
+состояние 34
+
+   34 int_var_type: USHORT_T .
+
+    $default  вывод с использованием правила 34 (int_var_type)
+
+
+состояние 35
+
+   33 int_var_type: SHORT_T .
+
+    $default  вывод с использованием правила 33 (int_var_type)
+
+
+состояние 36
+
+   36 int_var_type: UINT_T .
+
+    $default  вывод с использованием правила 36 (int_var_type)
+
+
+состояние 37
+
+   35 int_var_type: INT_T .
+
+    $default  вывод с использованием правила 35 (int_var_type)
+
+
+состояние 38
+
+   38 int_var_type: ULONG_T .
+
+    $default  вывод с использованием правила 38 (int_var_type)
+
+
+состояние 39
+
+   37 int_var_type: LONG_T .
+
+    $default  вывод с использованием правила 37 (int_var_type)
+
+
+состояние 40
+
+   39 int_var_type: LONG_LONG_T .
+
+    $default  вывод с использованием правила 39 (int_var_type)
+
+
+состояние 41
+
+   32 int_var_type: UCHAR_T .
+
+    $default  вывод с использованием правила 32 (int_var_type)
+
+
+состояние 42
+
+   31 int_var_type: CHAR_T .
+
+    $default  вывод с использованием правила 31 (int_var_type)
+
+
+состояние 43
+
+   17 const_decl: ID COLON int_var_type . EQUALS NUMBER SEMICOLON
+
+    EQUALS  сдвиг, и переход в состояние 72
+
+
+состояние 44
+
+   75 prog_block_end: END_KW DOT .
+
+    $default  вывод с использованием правила 75 (prog_block_end)
+
+
+состояние 45
+
+   58 expr: OPEN_BR . expr CLOSE_BR
+
+    OPEN_BR  сдвиг, и переход в состояние 45
+    NOT_KW   сдвиг, и переход в состояние 46
+    NUMBER   сдвиг, и переход в состояние 47
+    NUMBERF  сдвиг, и переход в состояние 48
+    ID       сдвиг, и переход в состояние 49
+
+    expr  переход в состояние 73
+
+
+состояние 46
+
+   74 expr: NOT_KW . expr
+
+    OPEN_BR  сдвиг, и переход в состояние 45
+    NOT_KW   сдвиг, и переход в состояние 46
+    NUMBER   сдвиг, и переход в состояние 47
+    NUMBERF  сдвиг, и переход в состояние 48
+    ID       сдвиг, и переход в состояние 49
+
+    expr  переход в состояние 74
+
+
+состояние 47
+
+   55 expr: NUMBER .
+
+    $default  вывод с использованием правила 55 (expr)
+
+
+состояние 48
+
+   56 expr: NUMBERF .
+
+    $default  вывод с использованием правила 56 (expr)
+
+
+состояние 49
+
+   57 expr: ID .
+
+    $default  вывод с использованием правила 57 (expr)
+
+
+состояние 50
+
+   50 if_stmt_begin: IF_KW expr . THEN_KW
+   59 expr: expr . PLUS expr
+   60     | expr . MINUS expr
+   61     | expr . ASTERISK expr
+   62     | expr . DIV_F expr
+   63     | expr . DIV_KW expr
+   64     | expr . MOD_KW expr
+   65     | expr . GREATER_THAN expr
+   66     | expr . GREATER_OR_EQUALS expr
+   67     | expr . LESS_THAN expr
+   68     | expr . LESS_OR_EQUALS expr
+   69     | expr . EQUALS expr
+   70     | expr . NOT_EQUAL expr
+   71     | expr . AND_KW expr
+   72     | expr . OR_KW expr
+   73     | expr . XOR_KW expr
+
+    ASTERISK           сдвиг, и переход в состояние 75
+    PLUS               сдвиг, и переход в состояние 76
+    MINUS              сдвиг, и переход в состояние 77
+    DIV_F              сдвиг, и переход в состояние 78
+    DIV_KW             сдвиг, и переход в состояние 79
+    MOD_KW             сдвиг, и переход в состояние 80
+    EQUALS             сдвиг, и переход в состояние 81
+    NOT_EQUAL          сдвиг, и переход в состояние 82
+    LESS_THAN          сдвиг, и переход в состояние 83
+    GREATER_THAN       сдвиг, и переход в состояние 84
+    LESS_OR_EQUALS     сдвиг, и переход в состояние 85
+    GREATER_OR_EQUALS  сдвиг, и переход в состояние 86
+    AND_KW             сдвиг, и переход в состояние 87
+    OR_KW              сдвиг, и переход в состояние 88
+    XOR_KW             сдвиг, и переход в состояние 89
+    THEN_KW            сдвиг, и переход в состояние 90
+
+
+состояние 51
+
+   54 num_assignment: ID ASSIGN . expr
+
+    OPEN_BR  сдвиг, и переход в состояние 45
+    NOT_KW   сдвиг, и переход в состояние 46
+    NUMBER   сдвиг, и переход в состояние 47
+    NUMBERF  сдвиг, и переход в состояние 48
+    ID       сдвиг, и переход в состояние 49
+
+    expr  переход в состояние 91
+
+
+состояние 52
+
+   53 commands_block: BEGIN_KW . commands END_KW SEMICOLON
+
+    $default  вывод с использованием правила 44 (commands)
+
+    commands  переход в состояние 92
+
+
+состояние 53
+
+   52 commands_block: command .
+
+    $default  вывод с использованием правила 52 (commands_block)
+
+
+состояние 54
+
+   48 if_stmt: if_stmt_begin commands_block . if_stmt_end
+   49        | if_stmt_begin commands_block . ELSE_KW commands_block
+
+    ELSE_KW  сдвиг, и переход в состояние 93
+
+    ELSE_KW   [вывод с использованием правила 51 (if_stmt_end)]
+    $default  вывод с использованием правила 51 (if_stmt_end)
+
+    if_stmt_end  переход в состояние 94
+
+
+состояние 55
+
+   46 command: num_assignment SEMICOLON .
+
+    $default  вывод с использованием правила 46 (command)
+
+
+состояние 56
+
+   22 gen_var_type: USHORT_T .
+   34 int_var_type: USHORT_T .
+
+    EQUALS    вывод с использованием правила 34 (int_var_type)
+    $default  вывод с использованием правила 22 (gen_var_type)
+
+
+состояние 57
+
+   21 gen_var_type: SHORT_T .
+   33 int_var_type: SHORT_T .
+
+    EQUALS    вывод с использованием правила 33 (int_var_type)
+    $default  вывод с использованием правила 21 (gen_var_type)
+
+
+состояние 58
+
+   24 gen_var_type: UINT_T .
+   36 int_var_type: UINT_T .
+
+    EQUALS    вывод с использованием правила 36 (int_var_type)
+    $default  вывод с использованием правила 24 (gen_var_type)
+
+
+состояние 59
+
+   23 gen_var_type: INT_T .
+   35 int_var_type: INT_T .
+
+    EQUALS    вывод с использованием правила 35 (int_var_type)
+    $default  вывод с использованием правила 23 (gen_var_type)
+
+
+состояние 60
+
+   26 gen_var_type: ULONG_T .
+   38 int_var_type: ULONG_T .
+
+    EQUALS    вывод с использованием правила 38 (int_var_type)
+    $default  вывод с использованием правила 26 (gen_var_type)
+
+
+состояние 61
+
+   25 gen_var_type: LONG_T .
+   37 int_var_type: LONG_T .
+
+    EQUALS    вывод с использованием правила 37 (int_var_type)
+    $default  вывод с использованием правила 25 (gen_var_type)
+
+
+состояние 62
+
+   27 gen_var_type: LONG_LONG_T .
+   39 int_var_type: LONG_LONG_T .
+
+    EQUALS    вывод с использованием правила 39 (int_var_type)
+    $default  вывод с использованием правила 27 (gen_var_type)
+
+
+состояние 63
+
+   28 gen_var_type: FLOAT_T .
+   40 float_var_type: FLOAT_T .
+
+    EQUALS    вывод с использованием правила 40 (float_var_type)
+    $default  вывод с использованием правила 28 (gen_var_type)
+
+
+состояние 64
+
+   29 gen_var_type: DOUBLE_T .
+   41 float_var_type: DOUBLE_T .
+
+    EQUALS    вывод с использованием правила 41 (float_var_type)
+    $default  вывод с использованием правила 29 (gen_var_type)
+
+
+состояние 65
+
+   19 gen_var_type: UCHAR_T .
+   32 int_var_type: UCHAR_T .
+
+    EQUALS    вывод с использованием правила 32 (int_var_type)
+    $default  вывод с использованием правила 19 (gen_var_type)
+
+
+состояние 66
+
+   18 gen_var_type: CHAR_T .
+   31 int_var_type: CHAR_T .
+
+    EQUALS    вывод с использованием правила 31 (int_var_type)
+    $default  вывод с использованием правила 18 (gen_var_type)
+
+
+состояние 67
+
+   20 gen_var_type: WCHAR_T .
+
+    $default  вывод с использованием правила 20 (gen_var_type)
+
+
+состояние 68
+
+   30 gen_var_type: STRING_T .
+
+    $default  вывод с использованием правила 30 (gen_var_type)
+
+
+состояние 69
+
+   11 var_decl: ID COLON gen_var_type . SEMICOLON
+
+    SEMICOLON  сдвиг, и переход в состояние 95
+
+
+состояние 70
+
+   12 var_decl_init: ID COLON int_var_type . EQUALS NUMBER SEMICOLON
+
+    EQUALS  сдвиг, и переход в состояние 96
+
+
+состояние 71
+
+   13 var_decl_init: ID COLON float_var_type . EQUALS NUMBERF SEMICOLON
+
+    EQUALS  сдвиг, и переход в состояние 97
+
+
+состояние 72
+
+   17 const_decl: ID COLON int_var_type EQUALS . NUMBER SEMICOLON
+
+    NUMBER  сдвиг, и переход в состояние 98
+
+
+состояние 73
+
+   58 expr: OPEN_BR expr . CLOSE_BR
+   59     | expr . PLUS expr
+   60     | expr . MINUS expr
+   61     | expr . ASTERISK expr
+   62     | expr . DIV_F expr
+   63     | expr . DIV_KW expr
+   64     | expr . MOD_KW expr
+   65     | expr . GREATER_THAN expr
+   66     | expr . GREATER_OR_EQUALS expr
+   67     | expr . LESS_THAN expr
+   68     | expr . LESS_OR_EQUALS expr
+   69     | expr . EQUALS expr
+   70     | expr . NOT_EQUAL expr
+   71     | expr . AND_KW expr
+   72     | expr . OR_KW expr
+   73     | expr . XOR_KW expr
+
+    CLOSE_BR           сдвиг, и переход в состояние 99
+    ASTERISK           сдвиг, и переход в состояние 75
+    PLUS               сдвиг, и переход в состояние 76
+    MINUS              сдвиг, и переход в состояние 77
+    DIV_F              сдвиг, и переход в состояние 78
+    DIV_KW             сдвиг, и переход в состояние 79
+    MOD_KW             сдвиг, и переход в состояние 80
+    EQUALS             сдвиг, и переход в состояние 81
+    NOT_EQUAL          сдвиг, и переход в состояние 82
+    LESS_THAN          сдвиг, и переход в состояние 83
+    GREATER_THAN       сдвиг, и переход в состояние 84
+    LESS_OR_EQUALS     сдвиг, и переход в состояние 85
+    GREATER_OR_EQUALS  сдвиг, и переход в состояние 86
+    AND_KW             сдвиг, и переход в состояние 87
+    OR_KW              сдвиг, и переход в состояние 88
+    XOR_KW             сдвиг, и переход в состояние 89
+
+
+состояние 74
+
+   59 expr: expr . PLUS expr
+   60     | expr . MINUS expr
+   61     | expr . ASTERISK expr
+   62     | expr . DIV_F expr
+   63     | expr . DIV_KW expr
+   64     | expr . MOD_KW expr
+   65     | expr . GREATER_THAN expr
+   66     | expr . GREATER_OR_EQUALS expr
+   67     | expr . LESS_THAN expr
+   68     | expr . LESS_OR_EQUALS expr
+   69     | expr . EQUALS expr
+   70     | expr . NOT_EQUAL expr
+   71     | expr . AND_KW expr
+   72     | expr . OR_KW expr
+   73     | expr . XOR_KW expr
+   74     | NOT_KW expr .
+
+    EQUALS     сдвиг, и переход в состояние 81
+    NOT_EQUAL  сдвиг, и переход в состояние 82
+
+    $default  вывод с использованием правила 74 (expr)
+
+
+состояние 75
+
+   61 expr: expr ASTERISK . expr
+
+    OPEN_BR  сдвиг, и переход в состояние 45
+    NOT_KW   сдвиг, и переход в состояние 46
+    NUMBER   сдвиг, и переход в состояние 47
+    NUMBERF  сдвиг, и переход в состояние 48
+    ID       сдвиг, и переход в состояние 49
+
+    expr  переход в состояние 100
+
+
+состояние 76
+
+   59 expr: expr PLUS . expr
+
+    OPEN_BR  сдвиг, и переход в состояние 45
+    NOT_KW   сдвиг, и переход в состояние 46
+    NUMBER   сдвиг, и переход в состояние 47
+    NUMBERF  сдвиг, и переход в состояние 48
+    ID       сдвиг, и переход в состояние 49
+
+    expr  переход в состояние 101
+
+
+состояние 77
+
+   60 expr: expr MINUS . expr
+
+    OPEN_BR  сдвиг, и переход в состояние 45
+    NOT_KW   сдвиг, и переход в состояние 46
+    NUMBER   сдвиг, и переход в состояние 47
+    NUMBERF  сдвиг, и переход в состояние 48
+    ID       сдвиг, и переход в состояние 49
+
+    expr  переход в состояние 102
+
+
+состояние 78
+
+   62 expr: expr DIV_F . expr
+
+    OPEN_BR  сдвиг, и переход в состояние 45
+    NOT_KW   сдвиг, и переход в состояние 46
+    NUMBER   сдвиг, и переход в состояние 47
+    NUMBERF  сдвиг, и переход в состояние 48
+    ID       сдвиг, и переход в состояние 49
+
+    expr  переход в состояние 103
+
+
+состояние 79
+
+   63 expr: expr DIV_KW . expr
+
+    OPEN_BR  сдвиг, и переход в состояние 45
+    NOT_KW   сдвиг, и переход в состояние 46
+    NUMBER   сдвиг, и переход в состояние 47
+    NUMBERF  сдвиг, и переход в состояние 48
+    ID       сдвиг, и переход в состояние 49
+
+    expr  переход в состояние 104
+
+
+состояние 80
+
+   64 expr: expr MOD_KW . expr
+
+    OPEN_BR  сдвиг, и переход в состояние 45
+    NOT_KW   сдвиг, и переход в состояние 46
+    NUMBER   сдвиг, и переход в состояние 47
+    NUMBERF  сдвиг, и переход в состояние 48
+    ID       сдвиг, и переход в состояние 49
+
+    expr  переход в состояние 105
+
+
+состояние 81
+
+   69 expr: expr EQUALS . expr
+
+    OPEN_BR  сдвиг, и переход в состояние 45
+    NOT_KW   сдвиг, и переход в состояние 46
+    NUMBER   сдвиг, и переход в состояние 47
+    NUMBERF  сдвиг, и переход в состояние 48
+    ID       сдвиг, и переход в состояние 49
+
+    expr  переход в состояние 106
+
+
+состояние 82
+
+   70 expr: expr NOT_EQUAL . expr
+
+    OPEN_BR  сдвиг, и переход в состояние 45
+    NOT_KW   сдвиг, и переход в состояние 46
+    NUMBER   сдвиг, и переход в состояние 47
+    NUMBERF  сдвиг, и переход в состояние 48
+    ID       сдвиг, и переход в состояние 49
+
+    expr  переход в состояние 107
+
+
+состояние 83
+
+   67 expr: expr LESS_THAN . expr
+
+    OPEN_BR  сдвиг, и переход в состояние 45
+    NOT_KW   сдвиг, и переход в состояние 46
+    NUMBER   сдвиг, и переход в состояние 47
+    NUMBERF  сдвиг, и переход в состояние 48
+    ID       сдвиг, и переход в состояние 49
+
+    expr  переход в состояние 108
+
+
+состояние 84
+
+   65 expr: expr GREATER_THAN . expr
+
+    OPEN_BR  сдвиг, и переход в состояние 45
+    NOT_KW   сдвиг, и переход в состояние 46
+    NUMBER   сдвиг, и переход в состояние 47
+    NUMBERF  сдвиг, и переход в состояние 48
+    ID       сдвиг, и переход в состояние 49
+
+    expr  переход в состояние 109
+
+
+состояние 85
+
+   68 expr: expr LESS_OR_EQUALS . expr
+
+    OPEN_BR  сдвиг, и переход в состояние 45
+    NOT_KW   сдвиг, и переход в состояние 46
+    NUMBER   сдвиг, и переход в состояние 47
+    NUMBERF  сдвиг, и переход в состояние 48
+    ID       сдвиг, и переход в состояние 49
+
+    expr  переход в состояние 110
+
+
+состояние 86
+
+   66 expr: expr GREATER_OR_EQUALS . expr
+
+    OPEN_BR  сдвиг, и переход в состояние 45
+    NOT_KW   сдвиг, и переход в состояние 46
+    NUMBER   сдвиг, и переход в состояние 47
+    NUMBERF  сдвиг, и переход в состояние 48
+    ID       сдвиг, и переход в состояние 49
+
+    expr  переход в состояние 111
+
+
+состояние 87
+
+   71 expr: expr AND_KW . expr
+
+    OPEN_BR  сдвиг, и переход в состояние 45
+    NOT_KW   сдвиг, и переход в состояние 46
+    NUMBER   сдвиг, и переход в состояние 47
+    NUMBERF  сдвиг, и переход в состояние 48
+    ID       сдвиг, и переход в состояние 49
+
+    expr  переход в состояние 112
+
+
+состояние 88
+
+   72 expr: expr OR_KW . expr
+
+    OPEN_BR  сдвиг, и переход в состояние 45
+    NOT_KW   сдвиг, и переход в состояние 46
+    NUMBER   сдвиг, и переход в состояние 47
+    NUMBERF  сдвиг, и переход в состояние 48
+    ID       сдвиг, и переход в состояние 49
+
+    expr  переход в состояние 113
+
+
+состояние 89
+
+   73 expr: expr XOR_KW . expr
+
+    OPEN_BR  сдвиг, и переход в состояние 45
+    NOT_KW   сдвиг, и переход в состояние 46
+    NUMBER   сдвиг, и переход в состояние 47
+    NUMBERF  сдвиг, и переход в состояние 48
+    ID       сдвиг, и переход в состояние 49
+
+    expr  переход в состояние 114
+
+
+состояние 90
+
+   50 if_stmt_begin: IF_KW expr THEN_KW .
+
+    $default  вывод с использованием правила 50 (if_stmt_begin)
+
+
+состояние 91
+
+   54 num_assignment: ID ASSIGN expr .
+   59 expr: expr . PLUS expr
+   60     | expr . MINUS expr
+   61     | expr . ASTERISK expr
+   62     | expr . DIV_F expr
+   63     | expr . DIV_KW expr
+   64     | expr . MOD_KW expr
+   65     | expr . GREATER_THAN expr
+   66     | expr . GREATER_OR_EQUALS expr
+   67     | expr . LESS_THAN expr
+   68     | expr . LESS_OR_EQUALS expr
+   69     | expr . EQUALS expr
+   70     | expr . NOT_EQUAL expr
+   71     | expr . AND_KW expr
+   72     | expr . OR_KW expr
+   73     | expr . XOR_KW expr
+
+    ASTERISK           сдвиг, и переход в состояние 75
+    PLUS               сдвиг, и переход в состояние 76
+    MINUS              сдвиг, и переход в состояние 77
+    DIV_F              сдвиг, и переход в состояние 78
+    DIV_KW             сдвиг, и переход в состояние 79
+    MOD_KW             сдвиг, и переход в состояние 80
+    EQUALS             сдвиг, и переход в состояние 81
+    NOT_EQUAL          сдвиг, и переход в состояние 82
+    LESS_THAN          сдвиг, и переход в состояние 83
+    GREATER_THAN       сдвиг, и переход в состояние 84
+    LESS_OR_EQUALS     сдвиг, и переход в состояние 85
+    GREATER_OR_EQUALS  сдвиг, и переход в состояние 86
+    AND_KW             сдвиг, и переход в состояние 87
+    OR_KW              сдвиг, и переход в состояние 88
+    XOR_KW             сдвиг, и переход в состояние 89
+
+    $default  вывод с использованием правила 54 (num_assignment)
+
+
+состояние 92
+
+   45 commands: commands . command
+   53 commands_block: BEGIN_KW commands . END_KW SEMICOLON
+
+    END_KW  сдвиг, и переход в состояние 115
+    IF_KW   сдвиг, и переход в состояние 26
+    ID      сдвиг, и переход в состояние 27
+
+    command         переход в состояние 28
+    if_stmt         переход в состояние 29
+    if_stmt_begin   переход в состояние 30
+    num_assignment  переход в состояние 31
+
+
+состояние 93
+
+   49 if_stmt: if_stmt_begin commands_block ELSE_KW . commands_block
+
+    BEGIN_KW  сдвиг, и переход в состояние 52
+    IF_KW     сдвиг, и переход в состояние 26
+    ID        сдвиг, и переход в состояние 27
+
+    command         переход в состояние 53
+    if_stmt         переход в состояние 29
+    if_stmt_begin   переход в состояние 30
+    commands_block  переход в состояние 116
+    num_assignment  переход в состояние 31
+
+
+состояние 94
+
+   48 if_stmt: if_stmt_begin commands_block if_stmt_end .
+
+    $default  вывод с использованием правила 48 (if_stmt)
+
+
+состояние 95
+
+   11 var_decl: ID COLON gen_var_type SEMICOLON .
+
+    $default  вывод с использованием правила 11 (var_decl)
+
+
+состояние 96
+
+   12 var_decl_init: ID COLON int_var_type EQUALS . NUMBER SEMICOLON
+
+    NUMBER  сдвиг, и переход в состояние 117
+
+
+состояние 97
+
+   13 var_decl_init: ID COLON float_var_type EQUALS . NUMBERF SEMICOLON
+
+    NUMBERF  сдвиг, и переход в состояние 118
+
+
+состояние 98
+
+   17 const_decl: ID COLON int_var_type EQUALS NUMBER . SEMICOLON
+
+    SEMICOLON  сдвиг, и переход в состояние 119
+
+
+состояние 99
+
+   58 expr: OPEN_BR expr CLOSE_BR .
+
+    $default  вывод с использованием правила 58 (expr)
+
+
+состояние 100
+
+   59 expr: expr . PLUS expr
+   60     | expr . MINUS expr
+   61     | expr . ASTERISK expr
+   61     | expr ASTERISK expr .
+   62     | expr . DIV_F expr
+   63     | expr . DIV_KW expr
+   64     | expr . MOD_KW expr
+   65     | expr . GREATER_THAN expr
+   66     | expr . GREATER_OR_EQUALS expr
+   67     | expr . LESS_THAN expr
+   68     | expr . LESS_OR_EQUALS expr
+   69     | expr . EQUALS expr
+   70     | expr . NOT_EQUAL expr
+   71     | expr . AND_KW expr
+   72     | expr . OR_KW expr
+   73     | expr . XOR_KW expr
+
+    EQUALS     сдвиг, и переход в состояние 81
+    NOT_EQUAL  сдвиг, и переход в состояние 82
+    AND_KW     сдвиг, и переход в состояние 87
+    OR_KW      сдвиг, и переход в состояние 88
+    XOR_KW     сдвиг, и переход в состояние 89
+
+    $default  вывод с использованием правила 61 (expr)
+
+
+состояние 101
+
+   59 expr: expr . PLUS expr
+   59     | expr PLUS expr .
+   60     | expr . MINUS expr
+   61     | expr . ASTERISK expr
+   62     | expr . DIV_F expr
+   63     | expr . DIV_KW expr
+   64     | expr . MOD_KW expr
+   65     | expr . GREATER_THAN expr
+   66     | expr . GREATER_OR_EQUALS expr
+   67     | expr . LESS_THAN expr
+   68     | expr . LESS_OR_EQUALS expr
+   69     | expr . EQUALS expr
+   70     | expr . NOT_EQUAL expr
+   71     | expr . AND_KW expr
+   72     | expr . OR_KW expr
+   73     | expr . XOR_KW expr
+
+    EQUALS     сдвиг, и переход в состояние 81
+    NOT_EQUAL  сдвиг, и переход в состояние 82
+    AND_KW     сдвиг, и переход в состояние 87
+    OR_KW      сдвиг, и переход в состояние 88
+    XOR_KW     сдвиг, и переход в состояние 89
+
+    $default  вывод с использованием правила 59 (expr)
+
+
+состояние 102
+
+   59 expr: expr . PLUS expr
+   60     | expr . MINUS expr
+   60     | expr MINUS expr .
+   61     | expr . ASTERISK expr
+   62     | expr . DIV_F expr
+   63     | expr . DIV_KW expr
+   64     | expr . MOD_KW expr
+   65     | expr . GREATER_THAN expr
+   66     | expr . GREATER_OR_EQUALS expr
+   67     | expr . LESS_THAN expr
+   68     | expr . LESS_OR_EQUALS expr
+   69     | expr . EQUALS expr
+   70     | expr . NOT_EQUAL expr
+   71     | expr . AND_KW expr
+   72     | expr . OR_KW expr
+   73     | expr . XOR_KW expr
+
+    EQUALS     сдвиг, и переход в состояние 81
+    NOT_EQUAL  сдвиг, и переход в состояние 82
+    AND_KW     сдвиг, и переход в состояние 87
+    OR_KW      сдвиг, и переход в состояние 88
+    XOR_KW     сдвиг, и переход в состояние 89
+
+    $default  вывод с использованием правила 60 (expr)
+
+
+состояние 103
+
+   59 expr: expr . PLUS expr
+   60     | expr . MINUS expr
+   61     | expr . ASTERISK expr
+   62     | expr . DIV_F expr
+   62     | expr DIV_F expr .
+   63     | expr . DIV_KW expr
+   64     | expr . MOD_KW expr
+   65     | expr . GREATER_THAN expr
+   66     | expr . GREATER_OR_EQUALS expr
+   67     | expr . LESS_THAN expr
+   68     | expr . LESS_OR_EQUALS expr
+   69     | expr . EQUALS expr
+   70     | expr . NOT_EQUAL expr
+   71     | expr . AND_KW expr
+   72     | expr . OR_KW expr
+   73     | expr . XOR_KW expr
+
+    EQUALS     сдвиг, и переход в состояние 81
+    NOT_EQUAL  сдвиг, и переход в состояние 82
+    AND_KW     сдвиг, и переход в состояние 87
+    OR_KW      сдвиг, и переход в состояние 88
+    XOR_KW     сдвиг, и переход в состояние 89
+
+    $default  вывод с использованием правила 62 (expr)
+
+
+состояние 104
+
+   59 expr: expr . PLUS expr
+   60     | expr . MINUS expr
+   61     | expr . ASTERISK expr
+   62     | expr . DIV_F expr
+   63     | expr . DIV_KW expr
+   63     | expr DIV_KW expr .
+   64     | expr . MOD_KW expr
+   65     | expr . GREATER_THAN expr
+   66     | expr . GREATER_OR_EQUALS expr
+   67     | expr . LESS_THAN expr
+   68     | expr . LESS_OR_EQUALS expr
+   69     | expr . EQUALS expr
+   70     | expr . NOT_EQUAL expr
+   71     | expr . AND_KW expr
+   72     | expr . OR_KW expr
+   73     | expr . XOR_KW expr
+
+    EQUALS     сдвиг, и переход в состояние 81
+    NOT_EQUAL  сдвиг, и переход в состояние 82
+    AND_KW     сдвиг, и переход в состояние 87
+    OR_KW      сдвиг, и переход в состояние 88
+    XOR_KW     сдвиг, и переход в состояние 89
+
+    $default  вывод с использованием правила 63 (expr)
+
+
+состояние 105
+
+   59 expr: expr . PLUS expr
+   60     | expr . MINUS expr
+   61     | expr . ASTERISK expr
+   62     | expr . DIV_F expr
+   63     | expr . DIV_KW expr
+   64     | expr . MOD_KW expr
+   64     | expr MOD_KW expr .
+   65     | expr . GREATER_THAN expr
+   66     | expr . GREATER_OR_EQUALS expr
+   67     | expr . LESS_THAN expr
+   68     | expr . LESS_OR_EQUALS expr
+   69     | expr . EQUALS expr
+   70     | expr . NOT_EQUAL expr
+   71     | expr . AND_KW expr
+   72     | expr . OR_KW expr
+   73     | expr . XOR_KW expr
+
+    EQUALS     сдвиг, и переход в состояние 81
+    NOT_EQUAL  сдвиг, и переход в состояние 82
+    AND_KW     сдвиг, и переход в состояние 87
+    OR_KW      сдвиг, и переход в состояние 88
+    XOR_KW     сдвиг, и переход в состояние 89
+
+    $default  вывод с использованием правила 64 (expr)
+
+
+состояние 106
+
+   59 expr: expr . PLUS expr
+   60     | expr . MINUS expr
+   61     | expr . ASTERISK expr
+   62     | expr . DIV_F expr
+   63     | expr . DIV_KW expr
+   64     | expr . MOD_KW expr
+   65     | expr . GREATER_THAN expr
+   66     | expr . GREATER_OR_EQUALS expr
+   67     | expr . LESS_THAN expr
+   68     | expr . LESS_OR_EQUALS expr
+   69     | expr . EQUALS expr
+   69     | expr EQUALS expr .
+   70     | expr . NOT_EQUAL expr
+   71     | expr . AND_KW expr
+   72     | expr . OR_KW expr
+   73     | expr . XOR_KW expr
+
+    EQUALS     сдвиг, и переход в состояние 81
+    NOT_EQUAL  сдвиг, и переход в состояние 82
+
+    $default  вывод с использованием правила 69 (expr)
+
+
+состояние 107
+
+   59 expr: expr . PLUS expr
+   60     | expr . MINUS expr
+   61     | expr . ASTERISK expr
+   62     | expr . DIV_F expr
+   63     | expr . DIV_KW expr
+   64     | expr . MOD_KW expr
+   65     | expr . GREATER_THAN expr
+   66     | expr . GREATER_OR_EQUALS expr
+   67     | expr . LESS_THAN expr
+   68     | expr . LESS_OR_EQUALS expr
+   69     | expr . EQUALS expr
+   70     | expr . NOT_EQUAL expr
+   70     | expr NOT_EQUAL expr .
+   71     | expr . AND_KW expr
+   72     | expr . OR_KW expr
+   73     | expr . XOR_KW expr
+
+    EQUALS     сдвиг, и переход в состояние 81
+    NOT_EQUAL  сдвиг, и переход в состояние 82
+
+    $default  вывод с использованием правила 70 (expr)
+
+
+состояние 108
+
+   59 expr: expr . PLUS expr
+   60     | expr . MINUS expr
+   61     | expr . ASTERISK expr
+   62     | expr . DIV_F expr
+   63     | expr . DIV_KW expr
+   64     | expr . MOD_KW expr
+   65     | expr . GREATER_THAN expr
+   66     | expr . GREATER_OR_EQUALS expr
+   67     | expr . LESS_THAN expr
+   67     | expr LESS_THAN expr .
+   68     | expr . LESS_OR_EQUALS expr
+   69     | expr . EQUALS expr
+   70     | expr . NOT_EQUAL expr
+   71     | expr . AND_KW expr
+   72     | expr . OR_KW expr
+   73     | expr . XOR_KW expr
+
+    EQUALS     сдвиг, и переход в состояние 81
+    NOT_EQUAL  сдвиг, и переход в состояние 82
+    AND_KW     сдвиг, и переход в состояние 87
+    OR_KW      сдвиг, и переход в состояние 88
+    XOR_KW     сдвиг, и переход в состояние 89
+
+    $default  вывод с использованием правила 67 (expr)
+
+
+состояние 109
+
+   59 expr: expr . PLUS expr
+   60     | expr . MINUS expr
+   61     | expr . ASTERISK expr
+   62     | expr . DIV_F expr
+   63     | expr . DIV_KW expr
+   64     | expr . MOD_KW expr
+   65     | expr . GREATER_THAN expr
+   65     | expr GREATER_THAN expr .
+   66     | expr . GREATER_OR_EQUALS expr
+   67     | expr . LESS_THAN expr
+   68     | expr . LESS_OR_EQUALS expr
+   69     | expr . EQUALS expr
+   70     | expr . NOT_EQUAL expr
+   71     | expr . AND_KW expr
+   72     | expr . OR_KW expr
+   73     | expr . XOR_KW expr
+
+    EQUALS     сдвиг, и переход в состояние 81
+    NOT_EQUAL  сдвиг, и переход в состояние 82
+    AND_KW     сдвиг, и переход в состояние 87
+    OR_KW      сдвиг, и переход в состояние 88
+    XOR_KW     сдвиг, и переход в состояние 89
+
+    $default  вывод с использованием правила 65 (expr)
+
+
+состояние 110
+
+   59 expr: expr . PLUS expr
+   60     | expr . MINUS expr
+   61     | expr . ASTERISK expr
+   62     | expr . DIV_F expr
+   63     | expr . DIV_KW expr
+   64     | expr . MOD_KW expr
+   65     | expr . GREATER_THAN expr
+   66     | expr . GREATER_OR_EQUALS expr
+   67     | expr . LESS_THAN expr
+   68     | expr . LESS_OR_EQUALS expr
+   68     | expr LESS_OR_EQUALS expr .
+   69     | expr . EQUALS expr
+   70     | expr . NOT_EQUAL expr
+   71     | expr . AND_KW expr
+   72     | expr . OR_KW expr
+   73     | expr . XOR_KW expr
+
+    EQUALS     сдвиг, и переход в состояние 81
+    NOT_EQUAL  сдвиг, и переход в состояние 82
+    AND_KW     сдвиг, и переход в состояние 87
+    OR_KW      сдвиг, и переход в состояние 88
+    XOR_KW     сдвиг, и переход в состояние 89
+
+    $default  вывод с использованием правила 68 (expr)
+
+
+состояние 111
+
+   59 expr: expr . PLUS expr
+   60     | expr . MINUS expr
+   61     | expr . ASTERISK expr
+   62     | expr . DIV_F expr
+   63     | expr . DIV_KW expr
+   64     | expr . MOD_KW expr
+   65     | expr . GREATER_THAN expr
+   66     | expr . GREATER_OR_EQUALS expr
+   66     | expr GREATER_OR_EQUALS expr .
+   67     | expr . LESS_THAN expr
+   68     | expr . LESS_OR_EQUALS expr
+   69     | expr . EQUALS expr
+   70     | expr . NOT_EQUAL expr
+   71     | expr . AND_KW expr
+   72     | expr . OR_KW expr
+   73     | expr . XOR_KW expr
+
+    EQUALS     сдвиг, и переход в состояние 81
+    NOT_EQUAL  сдвиг, и переход в состояние 82
+    AND_KW     сдвиг, и переход в состояние 87
+    OR_KW      сдвиг, и переход в состояние 88
+    XOR_KW     сдвиг, и переход в состояние 89
+
+    $default  вывод с использованием правила 66 (expr)
+
+
+состояние 112
+
+   59 expr: expr . PLUS expr
+   60     | expr . MINUS expr
+   61     | expr . ASTERISK expr
+   62     | expr . DIV_F expr
+   63     | expr . DIV_KW expr
+   64     | expr . MOD_KW expr
+   65     | expr . GREATER_THAN expr
+   66     | expr . GREATER_OR_EQUALS expr
+   67     | expr . LESS_THAN expr
+   68     | expr . LESS_OR_EQUALS expr
+   69     | expr . EQUALS expr
+   70     | expr . NOT_EQUAL expr
+   71     | expr . AND_KW expr
+   71     | expr AND_KW expr .
+   72     | expr . OR_KW expr
+   73     | expr . XOR_KW expr
+
+    EQUALS     сдвиг, и переход в состояние 81
+    NOT_EQUAL  сдвиг, и переход в состояние 82
+
+    $default  вывод с использованием правила 71 (expr)
+
+
+состояние 113
+
+   59 expr: expr . PLUS expr
+   60     | expr . MINUS expr
+   61     | expr . ASTERISK expr
+   62     | expr . DIV_F expr
+   63     | expr . DIV_KW expr
+   64     | expr . MOD_KW expr
+   65     | expr . GREATER_THAN expr
+   66     | expr . GREATER_OR_EQUALS expr
+   67     | expr . LESS_THAN expr
+   68     | expr . LESS_OR_EQUALS expr
+   69     | expr . EQUALS expr
+   70     | expr . NOT_EQUAL expr
+   71     | expr . AND_KW expr
+   72     | expr . OR_KW expr
+   72     | expr OR_KW expr .
+   73     | expr . XOR_KW expr
+
+    EQUALS     сдвиг, и переход в состояние 81
+    NOT_EQUAL  сдвиг, и переход в состояние 82
+
+    $default  вывод с использованием правила 72 (expr)
+
+
+состояние 114
+
+   59 expr: expr . PLUS expr
+   60     | expr . MINUS expr
+   61     | expr . ASTERISK expr
+   62     | expr . DIV_F expr
+   63     | expr . DIV_KW expr
+   64     | expr . MOD_KW expr
+   65     | expr . GREATER_THAN expr
+   66     | expr . GREATER_OR_EQUALS expr
+   67     | expr . LESS_THAN expr
+   68     | expr . LESS_OR_EQUALS expr
+   69     | expr . EQUALS expr
+   70     | expr . NOT_EQUAL expr
+   71     | expr . AND_KW expr
+   72     | expr . OR_KW expr
+   73     | expr . XOR_KW expr
+   73     | expr XOR_KW expr .
+
+    EQUALS     сдвиг, и переход в состояние 81
+    NOT_EQUAL  сдвиг, и переход в состояние 82
+
+    $default  вывод с использованием правила 73 (expr)
+
+
+состояние 115
+
+   53 commands_block: BEGIN_KW commands END_KW . SEMICOLON
+
+    SEMICOLON  сдвиг, и переход в состояние 120
+
+
+состояние 116
+
+   49 if_stmt: if_stmt_begin commands_block ELSE_KW commands_block .
+
+    $default  вывод с использованием правила 49 (if_stmt)
+
+
+состояние 117
+
+   12 var_decl_init: ID COLON int_var_type EQUALS NUMBER . SEMICOLON
+
+    SEMICOLON  сдвиг, и переход в состояние 121
+
+
+состояние 118
+
+   13 var_decl_init: ID COLON float_var_type EQUALS NUMBERF . SEMICOLON
+
+    SEMICOLON  сдвиг, и переход в состояние 122
+
+
+состояние 119
+
+   17 const_decl: ID COLON int_var_type EQUALS NUMBER SEMICOLON .
+
+    $default  вывод с использованием правила 17 (const_decl)
+
+
+состояние 120
+
+   53 commands_block: BEGIN_KW commands END_KW SEMICOLON .
+
+    $default  вывод с использованием правила 53 (commands_block)
+
+
+состояние 121
+
+   12 var_decl_init: ID COLON int_var_type EQUALS NUMBER SEMICOLON .
+
+    $default  вывод с использованием правила 12 (var_decl_init)
+
+
+состояние 122
+
+   13 var_decl_init: ID COLON float_var_type EQUALS NUMBERF SEMICOLON .
+
+    $default  вывод с использованием правила 13 (var_decl_init)

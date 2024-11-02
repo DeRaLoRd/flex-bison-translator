@@ -8,8 +8,17 @@ extern FILE* yyout;
 
 int yylex();
 void yyerror(char* s);
+void printTabs(int);
 
+// 0 - disable, 1 - enable
 int yydebug = 0;
+
+// string with right amount of tabs
+char* tabs = NULL;
+int tabs_amount = 0;
+
+// 0 - not in one-command-block, 1 - IS in that block
+char command_in_block = 0;
 %}
 
 %union {
@@ -51,9 +60,14 @@ int yydebug = 0;
 %left AND_KW OR_KW XOR_KW
 %right EQUALS NOT_EQUAL NOT_KW
 
+// for if statements 
+%right THEN_KW ELSE_KW
+
 %start program
 
 %%
+
+// Programme begin
 
 program
     : start_block const_block var_block prog_block
@@ -72,6 +86,8 @@ start_block
                        "#include <stddef.h>\n");
     }
 ;
+
+// var/const blocks
 
 var_block
     : /* empty */
@@ -115,6 +131,8 @@ const_decl
     : ID COLON int_var_type EQUALS NUMBER SEMICOLON {fprintf(yyout, "const %s %s = %s;\n", $3, $1, $5);}
 ;
 
+// General var types for late initialization
+
 gen_var_type
     : CHAR_T
     | UCHAR_T
@@ -130,6 +148,8 @@ gen_var_type
     | DOUBLE_T
     | STRING_T
 ;
+
+// Integer var types for in-place initialization (i forgor a proper word)
 
 int_var_type
     : CHAR_T
@@ -148,12 +168,14 @@ float_var_type
     | DOUBLE_T
 ;
 
+// main function
+
 prog_block
     : prog_block_begin commands prog_block_end
 ;
 
 prog_block_begin
-    : BEGIN_KW {fprintf(yyout, "\nint main()\n{\n");}
+    : BEGIN_KW {fprintf(yyout, "\nint main()\n{\n"); tabs_amount++;}
 ;
 
 commands
@@ -162,7 +184,91 @@ commands
 ;
 
 command
-    : num_assignment SEMICOLON  {fprintf(yyout, "\t%s;\n", $1);}
+    : num_assignment SEMICOLON  {
+        if (command_in_block) tabs_amount++;
+        printTabs(tabs_amount);
+        fprintf(yyout, "%s;\n", $1);
+        if (command_in_block) {
+            tabs_amount--;
+            command_in_block = 0;
+        }
+    }
+    | if_stmt
+    | else_stmt
+    | while_stmt
+;
+
+if_stmt
+    : if_stmt_begin THEN_KW commands_block
+;
+
+if_stmt_begin
+    : IF_KW expr {
+        if (command_in_block) tabs_amount++;
+        printTabs(tabs_amount);
+        fprintf(yyout, "if (%s)\n", $2);
+        if (command_in_block) {
+            tabs_amount--;
+            command_in_block = 0;
+        }
+        else
+            command_in_block = 1;
+    }
+;
+
+else_stmt
+    : else_stmt_begin commands_block
+;
+
+else_stmt_begin
+    : ELSE_KW   {
+        printTabs(tabs_amount);
+        fprintf(yyout, "else\n");
+        command_in_block = 1;
+    }
+
+while_stmt
+    : while_stmt_begin while_stmt_end
+;
+
+while_stmt_begin
+    : WHILE_KW expr DO_KW {
+        if (command_in_block) tabs_amount++;
+        printTabs(tabs_amount);
+        fprintf(yyout, "while (%s)\n", $2);
+        if (command_in_block) {
+            tabs_amount--;
+            command_in_block = 0;
+        }
+        else
+            command_in_block = 1;
+    }
+;
+
+while_stmt_end
+    : commands_block
+;
+
+commands_block
+    : command
+    | commands_block_begin commands commands_block_end
+;
+
+commands_block_begin
+    : BEGIN_KW  {
+        if (command_in_block) command_in_block = 0;
+        printTabs(tabs_amount);
+        fprintf(yyout, "{\n");
+        tabs_amount++;
+    }
+;
+
+commands_block_end
+    : END_KW SEMICOLON  {
+        tabs_amount--;
+        printTabs(tabs_amount);
+        fprintf(yyout, "}\n");
+    }
 ;
 
 num_assignment
@@ -170,30 +276,33 @@ num_assignment
 ;
 
 expr
-    : NUMBER                    {sprintf($$, "%s", $1);}
-    | NUMBERF                   {sprintf($$, "%s", $1);}
-    | ID                        {sprintf($$, "%s", $1);}
-    | OPEN_BR expr CLOSE_BR     {sprintf($$, "(%s)", $2);}
-    | expr PLUS expr            {sprintf($$, "%s + %s", $1, $3);}
-    | expr MINUS expr           {sprintf($$, "%s - %s", $1, $3);}
-    | expr ASTERISK expr        {sprintf($$, "%s * %s", $1, $3);}
-    | expr DIV_F expr           {sprintf($$, "%s / %s", $1, $3);}
+    : NUMBER                        {sprintf($$, "%s", $1);}
+    | NUMBERF                       {sprintf($$, "%s", $1);}
+    | ID                            {sprintf($$, "%s", $1);}
+    | OPEN_BR expr CLOSE_BR         {sprintf($$, "(%s)", $2);}
+    | expr PLUS expr                {sprintf($$, "%s + %s", $1, $3);}
+    | expr MINUS expr               {sprintf($$, "%s - %s", $1, $3);}
+    | expr ASTERISK expr            {sprintf($$, "%s * %s", $1, $3);}
+    | expr DIV_F expr               {sprintf($$, "%s / %s", $1, $3);}
     | expr DIV_KW expr              {sprintf($$, "%s / %s", $1, $3);}
     | expr MOD_KW expr              {sprintf($$, "%s %% %s", $1, $3);}
     | expr GREATER_THAN expr        {sprintf($$, "%s > %s", $1, $3);}
     | expr GREATER_OR_EQUALS expr   {sprintf($$, "%s >= %s", $1, $3);}
-    | expr LESS_THAN expr           {sprintf($$, "%s >= %s", $1, $3);}
-    | expr LESS_OR_EQUALS expr      {sprintf($$, "%s >= %s", $1, $3);}
-    | expr EQUALS expr              {sprintf($$, "%s = %s", $1, $3);}
-    | expr NOT_EQUAL expr   {sprintf($$, "%s != %s", $1, $3);}
-    | expr AND_KW expr      {sprintf($$, "%s && %s", $1, $3);}
-    | expr OR_KW expr       {sprintf($$, "%s || %s", $1, $3);}
-    | expr XOR_KW expr      {sprintf($$, "%s ^ %s", $1, $3);}
-    | NOT_KW expr           {sprintf($$, "!%s", $2);}
+    | expr LESS_THAN expr           {sprintf($$, "%s < %s", $1, $3);}
+    | expr LESS_OR_EQUALS expr      {sprintf($$, "%s <= %s", $1, $3);}
+    | expr EQUALS expr              {sprintf($$, "%s == %s", $1, $3);}
+    | expr NOT_EQUAL expr           {sprintf($$, "%s != %s", $1, $3);}
+    | expr AND_KW expr              {sprintf($$, "%s && %s", $1, $3);}
+    | expr OR_KW expr               {sprintf($$, "%s || %s", $1, $3);}
+    | expr XOR_KW expr              {sprintf($$, "%s ^ %s", $1, $3);}
+    | NOT_KW expr                   {sprintf($$, "!%s", $2);}
 ;
 
 prog_block_end
-    : END_KW DOT {fprintf(yyout, "\treturn 0;\n}");}
+    : END_KW DOT {
+        printTabs(tabs_amount);
+        fprintf(yyout, "return 0;\n}");
+    }
 ;
 
 %%
@@ -209,4 +318,11 @@ int main()
 void yyerror(char* s)
 {
     printf("%s", s);
+}
+
+void printTabs(int amount)
+{
+    for (int i = 0; i < amount; i++) {
+        fprintf(yyout, "\t");
+    }
 }

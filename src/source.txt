@@ -13,4 +13,15 @@ begin
     x := 2.3 + 3 * 2;
     y := 3 mod 8 * (15 - 66);
     z := x + y;
+
+    if x + 3 = 8 then 
+        z := bidorasy;
+        x := 666;
+    else 
+        begin
+            z := 0;
+        end;
+
+    while x > 100 do x := x - 1;
+
 end.

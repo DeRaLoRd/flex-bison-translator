@@ -21,5 +21,14 @@ int main()
 	x = 2.3 + 3 * 2;
 	y = 3 % 8 * (15 - 66);
 	z = x + y;
+	if (x + 3 == 8)
+		z = bidorasy;
+	x = 666;
+	else
+	{
+		z = 0;
+	}
+	while (x < 100)
+		x = x - 1;
 	return 0;
 }
