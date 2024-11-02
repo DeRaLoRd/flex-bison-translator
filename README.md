@@ -3,8 +3,8 @@
 | Stage                                                | Status                 |
 |:-----------------------------------------------------|-----------------------:|
 | Lexical analyzator                                   |                   Done |
-| Symantic analyzator                                  |             Maybe done |
-| Full head-on ready-ass PascalABC.NET -> C translator | Don't know didn't read |
+| Semantic analyzator                                  |            In progress |
+| Full head-on ready-ass PascalABC.NET -> C translator |            In progress |
 
 ## How to build
 You will require such tools as `gcc`, `make`, `flex` and `bison` in order to build this project. I'm sure y'all have those, but it is highly recomended for you to setup things as this guide states to avoid random issues. You *may* not use `make` for this but other tools are must-have.
