@@ -90,6 +90,7 @@ semicolon   ;
 colon       :
 dot         \.
 range       \.\.
+comma       ,
 
 %%
 {pr_start}  {return PROGRAM_START;}
@@ -173,6 +174,7 @@ range       \.\.
 {colon}     {return COLON;}
 {dot}       {return DOT;}
 {range}     {return RANGE;}
+{comma}     {return COMMA;}
 
 {num}       {yylval.cval = strdup(yytext); return NUMBER;}
 {numf}      {yylval.cval = strdup(yytext); return NUMBERF;}
