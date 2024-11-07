@@ -179,7 +179,7 @@ comma       ,
 {num}       {yylval.cval = strdup(yytext); return NUMBER;}
 {numf}      {yylval.cval = strdup(yytext); return NUMBERF;}
 {id}        {yylval.cval = strdup(yytext); return ID;}
-{word}      {yylval.cval = strdup(yytext); return WORD;}
+{word}      {yytext[strlen(yytext) - 1] = '\0'; yylval.cval = strdup(yytext + 1); return WORD;}
 %%
 
 int yywrap() {

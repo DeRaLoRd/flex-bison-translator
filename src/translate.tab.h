@@ -106,10 +106,11 @@
      COLON = 322,
      DOT = 323,
      RANGE = 324,
-     NUMBER = 325,
-     NUMBERF = 326,
-     ID = 327,
-     WORD = 328
+     COMMA = 325,
+     NUMBER = 326,
+     NUMBERF = 327,
+     ID = 328,
+     WORD = 329
    };
 #endif
 
@@ -120,14 +121,14 @@ typedef union YYSTYPE
 {
 
 /* Line 1676 of yacc.c  */
-#line 24 "translate.y"
+#line 23 "translate.y"
 
     char* cval;
 
 
 
 /* Line 1676 of yacc.c  */
-#line 131 "translate.tab.h"
+#line 132 "translate.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */

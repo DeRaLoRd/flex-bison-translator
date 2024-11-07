@@ -11,14 +11,15 @@ void yyerror(char* s);
 void printTabs(int);
 
 // 0 - disable, 1 - enable
-int yydebug = 0;
+int yydebug = 1;
 
 // string with right amount of tabs
 char* tabs = NULL;
 int tabs_amount = 0;
 
-// 0 - not in one-command-block, 1 - IS in that block
-char command_in_block = 0;
+int iterator_amount = 0;
+
+char* func_header_buffer = "";
 %}
 
 %union {
@@ -46,7 +47,7 @@ char command_in_block = 0;
 
 %token PROCEDURE_KW FUNCTION_KW 
 
-%token SEMICOLON COLON DOT RANGE 
+%token SEMICOLON COLON DOT RANGE COMMA
 
 %token NUMBER NUMBERF ID WORD
 
@@ -70,7 +71,7 @@ char command_in_block = 0;
 // Programme begin
 
 program
-    : start_block const_block var_block prog_block
+    : start_block const_block var_block funcs_procs_block prog_block
 ;
 
 start_block
@@ -168,6 +169,48 @@ float_var_type
     | DOUBLE_T
 ;
 
+funcs_procs_block
+    : /* empty */
+    | funcs_procs_block func_proc
+;
+
+func_proc
+    : procedure
+    //| function
+;
+
+procedure
+    : procedure_begin params procedure_end commands_block
+;
+
+procedure_begin
+    : PROCEDURE_KW ID OPEN_BR {fprintf(yyout, "void %s(", $2);}
+;
+
+params
+    : /* empty */
+    | params SEMICOLON {fprintf(yyout, ", ");} param
+    | param
+;
+
+param
+    : ID {printf("%s", $1);} COLON gen_var_type {fprintf(yyout, "%s %s", $4, $1);}
+;
+
+procedure_end
+    : CLOSE_BR SEMICOLON {fprintf(yyout, ")\n");}
+;
+
+//function
+//    : function_header COLON gen_var_type {
+//        fprintf(yyout, "%s %s", $3, func_header_buffer);
+//    }
+//    SEMICOLON commands_block
+//;
+
+//function_header
+//    : FUNCTION_KW ID OPEN_BR func_params
+
 // main function
 
 prog_block
@@ -185,34 +228,29 @@ commands
 
 command
     : num_assignment SEMICOLON  {
-        if (command_in_block) tabs_amount++;
         printTabs(tabs_amount);
         fprintf(yyout, "%s;\n", $1);
-        if (command_in_block) {
-            tabs_amount--;
-            command_in_block = 0;
-        }
     }
     | if_stmt
     | else_stmt
     | while_stmt
+    | loop_stmt
+    | for_stmt
+    | repeat_stmt
+    | BREAK_KW SEMICOLON {printTabs(tabs_amount); fprintf(yyout, "break;\n");}
+    | CONTINUE_KW SEMICOLON {printTabs(tabs_amount); fprintf(yyout, "continue;\n");}
+    | print_command
+    | read_command
 ;
 
 if_stmt
-    : if_stmt_begin THEN_KW commands_block
+    : if_stmt_begin commands_block
 ;
 
 if_stmt_begin
-    : IF_KW expr {
-        if (command_in_block) tabs_amount++;
+    : IF_KW expr THEN_KW {
         printTabs(tabs_amount);
         fprintf(yyout, "if (%s)\n", $2);
-        if (command_in_block) {
-            tabs_amount--;
-            command_in_block = 0;
-        }
-        else
-            command_in_block = 1;
     }
 ;
 
@@ -224,39 +262,89 @@ else_stmt_begin
     : ELSE_KW   {
         printTabs(tabs_amount);
         fprintf(yyout, "else\n");
-        command_in_block = 1;
     }
 
 while_stmt
-    : while_stmt_begin while_stmt_end
+    : while_stmt_begin commands_block
 ;
 
 while_stmt_begin
     : WHILE_KW expr DO_KW {
-        if (command_in_block) tabs_amount++;
         printTabs(tabs_amount);
         fprintf(yyout, "while (%s)\n", $2);
-        if (command_in_block) {
-            tabs_amount--;
-            command_in_block = 0;
-        }
-        else
-            command_in_block = 1;
     }
 ;
 
-while_stmt_end
-    : commands_block
+loop_stmt
+    : loop_stmt_begin commands_block
+;
+
+loop_stmt_begin
+    : LOOP_KW expr DO_KW {
+        printTabs(tabs_amount);
+        fprintf(yyout, "for (int ptsd_iterator%d = 0; ptsd_iterator%d < %s; ptsd_iterator%d++)\n", 
+                        iterator_amount, iterator_amount, $2, iterator_amount);
+        iterator_amount++;
+    }
+;
+
+for_stmt
+    : for_stmt_begin commands_block
+;
+
+for_stmt_begin
+    : FOR_KW VAR_KW ID ASSIGN expr TO_KW expr DO_KW {
+        printTabs(tabs_amount);
+        fprintf(yyout, "for (int %s = %s; %s < %s; %s++)\n", $3, $5, $3, $7, $3);
+    }
+    | FOR_KW VAR_KW ID ASSIGN expr DOWNTO_KW expr DO_KW {
+        printTabs(tabs_amount);
+        fprintf(yyout, "for (int %s = %s; %s > %s; %s--)\n", $3, $5, $3, $7, $3);
+    }
+;
+
+repeat_stmt
+    :repeat_stmt_begin commands_block repeat_stmt_end
+;
+
+repeat_stmt_begin
+    : REPEAT_KW {
+        printTabs(tabs_amount);
+        fprintf(yyout, "do\n");
+    }
+;
+
+repeat_stmt_end
+    : UNTIL_KW expr SEMICOLON {
+        printTabs(tabs_amount);
+        fprintf(yyout, "while (%s);\n", $2);
+    }
+;
+
+print_command
+    : WRITE_F OPEN_BR expr CLOSE_BR SEMICOLON {
+        printTabs(tabs_amount);
+        fprintf(yyout, "printf(\"%%lf\", %s);\n", $3);
+    }
+    | WRITELN_F OPEN_BR expr CLOSE_BR SEMICOLON {
+        printTabs(tabs_amount);
+        fprintf(yyout, "printf(\"%%lf\\n\", %s);\n", $3);
+    }
+;
+
+read_command
+    : READ_F OPEN_BR ID CLOSE_BR SEMICOLON {
+        printTabs(tabs_amount);
+        fprintf(yyout, "scanf(\"%%lf\", &%s);\n", $3);
+    }
 ;
 
 commands_block
-    : command
-    | commands_block_begin commands commands_block_end
+    : commands_block_begin commands commands_block_end
 ;
 
 commands_block_begin
     : BEGIN_KW  {
-        if (command_in_block) command_in_block = 0;
         printTabs(tabs_amount);
         fprintf(yyout, "{\n");
         tabs_amount++;
@@ -279,6 +367,7 @@ expr
     : NUMBER                        {sprintf($$, "%s", $1);}
     | NUMBERF                       {sprintf($$, "%s", $1);}
     | ID                            {sprintf($$, "%s", $1);}
+    /*| WORD                          {sprintf($$, "\"%s\"", $1);}*/
     | OPEN_BR expr CLOSE_BR         {sprintf($$, "(%s)", $2);}
     | expr PLUS expr                {sprintf($$, "%s + %s", $1, $3);}
     | expr MINUS expr               {sprintf($$, "%s - %s", $1, $3);}
@@ -312,7 +401,7 @@ int main()
     yyin = fopen("source.txt", "r");
     yyout = fopen("output.c", "w");
 
-    return yyparse();
+    yyparse();
 }
 
 void yyerror(char* s)

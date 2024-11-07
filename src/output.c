@@ -15,20 +15,29 @@ const int bidorasy = 4;
 int x = 3;
 double y = 2.3;
 short z = 52;
+void penis(int a, double b)
+{
+	y = x + 3;
+}
+void penis(int a)
+{
+}
+void penis()
+{
+}
 
 int main()
 {
-	x = 2.3 + 3 * 2;
-	y = 3 % 8 * (15 - 66);
-	z = x + y;
-	if (x + 3 == 8)
-		z = bidorasy;
-	x = 666;
-	else
+	scanf("%lf", &x);
+	for (int ptsd_iterator0 = 0; ptsd_iterator0 < 10; ptsd_iterator0++)
 	{
-		z = 0;
+		for (int ptsd_iterator1 = 0; ptsd_iterator1 < 10; ptsd_iterator1++)
+		{
+			for (int ptsd_iterator2 = 0; ptsd_iterator2 < 10; ptsd_iterator2++)
+			{
+				printf("%lf", x + 3);
+			}
+		}
 	}
-	while (x < 100)
-		x = x - 1;
 	return 0;
 }
