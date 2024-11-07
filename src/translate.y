@@ -10,8 +10,8 @@ int yylex();
 void yyerror(char* s);
 void printTabs(int);
 
-// 0 - disable, 1 - enable
-int yydebug = 1;
+// 0 - disable (default), 1 - enable (better to do it through console when executing)
+int yydebug = 0;
 
 // string with right amount of tabs
 char* tabs = NULL;
@@ -194,7 +194,7 @@ params
 ;
 
 param
-    : ID {printf("%s", $1);} COLON gen_var_type {fprintf(yyout, "%s %s", $4, $1);}
+    : ID COLON gen_var_type {fprintf(yyout, "%s %s", $3, $1);}
 ;
 
 procedure_end
@@ -396,9 +396,42 @@ prog_block_end
 
 %%
 
-int main()
+int main(int argc, char* argv[])
 {
-    yyin = fopen("source.txt", "r");
+    char* filename = "source.txt";
+    if (argc < 2) {
+        yydebug = 0;
+    }
+    else if (argc == 2) {
+        if (argv[1][0] == '-' && argv[1][1] == 'd') {
+            yydebug = 1;
+        }
+        else {
+            filename = argv[1];
+            filename[strlen(filename)] = '\0';
+        }
+    }
+    else if (argc == 3) {
+        if (argv[1][0] == '-' && argv[1][1] == 'd') {
+            yydebug = 1;
+            filename = argv[2];
+            filename[strlen(filename)] = '\0';
+        }
+        else if (argv[2][0] == '-' && argv[2][1] == 'd') {
+            filename = argv[1];
+            yydebug = 1;
+        }
+    }
+    else {
+        printf("Too many arguments, usage: translate [-d for debug] [filename]");
+        return 1;
+    }
+
+    yyin = fopen(filename, "r");
+    if (!yyin) {
+        printf("No such file: %s", filename);
+        return 2;
+    }
     yyout = fopen("output.c", "w");
 
     yyparse();

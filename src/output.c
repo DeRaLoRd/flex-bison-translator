@@ -25,6 +25,10 @@ void penis(int a)
 void penis()
 {
 }
+void knee_surgery(double knee)
+{
+	result = knee + surgery;
+}
 
 int main()
 {

@@ -12,6 +12,10 @@ procedure penis(a: integer; b: real); begin y := x + 3; end;
 procedure penis(a: integer); begin end;
 procedure penis(); begin end;
 
+procedure knee_surgery(knee: real); 
+    begin 
+        result := knee + surgery; 
+    end;
 
 begin
     read(x);
