@@ -10,8 +10,6 @@ var
     result: integer;
 
 procedure foo(a: integer; b: real); begin y := x + 3; end;
-procedure bar(a: integer); begin end;
-procedure zap(); begin end;
 
 procedure knee_surgery(knee: real); 
     begin 
@@ -19,15 +17,25 @@ procedure knee_surgery(knee: real);
     end;
 
 begin
-    read(x);
-    loop 10 do
-    begin
-        loop 10 do
-        begin
-        loop 10 do
-            begin
-                write(x + 3);
-            end;
-        end;
+    if z > knee then begin
+        z := 52;
+    end;
+
+    loop 15 do begin
+        result := result + z * x - 4;
+    end;
+
+    while not y < 4 do begin
+        y := y - 1;
+    end;
+
+    repeat begin
+        writeln(y);
+        y := y + 1;
+    end;
+    until y < 13;
+
+    for var i := 10 downto 0 do begin
+        x := x + 1;
     end;
 end.

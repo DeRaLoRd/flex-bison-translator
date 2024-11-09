@@ -21,12 +21,6 @@ void foo(int a, double b)
 {
 	y = x + 3;
 }
-void bar(int a)
-{
-}
-void zap()
-{
-}
 void knee_surgery(double knee)
 {
 	result = knee + surgery;
@@ -34,16 +28,27 @@ void knee_surgery(double knee)
 
 int main()
 {
-	scanf("%lf", &x);
-	for (int ptsd_iterator0 = 0; ptsd_iterator0 < 10; ptsd_iterator0++)
+	if (z < knee)
 	{
-		for (int ptsd_iterator1 = 0; ptsd_iterator1 < 10; ptsd_iterator1++)
-		{
-			for (int ptsd_iterator2 = 0; ptsd_iterator2 < 10; ptsd_iterator2++)
-			{
-				printf("%lf", x + 3);
-			}
-		}
+		z = 52;
+	}
+	for (int ptsd_iterator0 = 0; ptsd_iterator0 < 15; ptsd_iterator0++)
+	{
+		result = result + z * x - 4;
+	}
+	while (!y > 4)
+	{
+		y = y - 1;
+	}
+	do
+	{
+		printf("%lf\n", y);
+		y = y + 1;
+	}
+	while (y > 13);
+	for (int i = 10; i > 0; i--)
+	{
+		x = x + 1;
 	}
 	return 0;
 }
