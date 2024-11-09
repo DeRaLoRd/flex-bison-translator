@@ -71,7 +71,7 @@ char* func_header_buffer = "";
 // Programme begin
 
 program
-    : start_block const_block var_block funcs_procs_block prog_block
+    : start_block const_block var_block {fprintf(yyout, "\n");} funcs_procs_block prog_block
 ;
 
 start_block
@@ -200,16 +200,6 @@ param
 procedure_end
     : CLOSE_BR SEMICOLON {fprintf(yyout, ")\n");}
 ;
-
-//function
-//    : function_header COLON gen_var_type {
-//        fprintf(yyout, "%s %s", $3, func_header_buffer);
-//    }
-//    SEMICOLON commands_block
-//;
-
-//function_header
-//    : FUNCTION_KW ID OPEN_BR func_params
 
 // main function
 

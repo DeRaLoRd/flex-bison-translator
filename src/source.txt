@@ -7,10 +7,11 @@ var
     x: integer = 3;
     y : real = 2.3;
     z: smallint = 52;
+    result: integer;
 
-procedure penis(a: integer; b: real); begin y := x + 3; end;
-procedure penis(a: integer); begin end;
-procedure penis(); begin end;
+procedure foo(a: integer; b: real); begin y := x + 3; end;
+procedure bar(a: integer); begin end;
+procedure zap(); begin end;
 
 procedure knee_surgery(knee: real); 
     begin 

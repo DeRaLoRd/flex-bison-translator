@@ -15,14 +15,16 @@ const int bidorasy = 4;
 int x = 3;
 double y = 2.3;
 short z = 52;
-void penis(int a, double b)
+int result;
+
+void foo(int a, double b)
 {
 	y = x + 3;
 }
-void penis(int a)
+void bar(int a)
 {
 }
-void penis()
+void zap()
 {
 }
 void knee_surgery(double knee)
